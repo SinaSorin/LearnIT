@@ -5,6 +5,7 @@ include_once 'include/dbh.inc.php';
 <html>
 	<head>
 	<title>Test</title>
+ <link rel="shortcut icon" href="logo2.png" type="image/png">
 	<style>
 	 body {
 	background-color:#e5ebe7;
@@ -255,6 +256,22 @@ font-size:18px;
 .rosu {
 	color:red;
 }
+.profil {
+	display:flex;
+	
+}
+.poza {
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	
+}
+.cont {
+	display:flex;
+	color:white;
+	font-size:18px;
+	margin-top:10px;
+}
 	</style>
 	
 	</head>
@@ -272,6 +289,24 @@ font-size:18px;
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
 					</form> ';
   ?>
+   <div class="profil">
+  
+	<a href="index.php"><img src="logo.png" class="poza"></a>
+	<?php 
+	if(isset($_SESSION['u_id']))
+	{
+		$user_status=$_SESSION['u_status'];
+		$user=$_SESSION['u_uid'];
+	if($user_status==1)
+		echo "<a href='toti.php'><div class='cont'>$user</div></a>";
+	else
+		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
+	}
+	
+	
+	?>	
+	
+  </div>
   </div>
    
  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -420,17 +455,28 @@ font-size:18px;
 			$sql8="SELECT * FROM medii WHERE id_user=$id_user";
 			$result8=mysqli_query($conn,$sql8);
 			if(mysqli_num_rows($result8)==0)
-			{
-				$sql9="ÏNSERT INTO medii(id_user,nr,medie) VALUES($id_user,1,$nota)";
+			{	$vars=1;
+				$sql9="INSERT INTO medii(id_user,nr,medie) VALUES($id_user,$vars,$nota)";
 				$result9=mysqli_query($conn,$sql9);
 			}
 			else
 				if(mysqli_num_rows($result8)<5)
 				{
-					$sql10="SELECT AVG(nota) FROM note WHERE id_user=$id_user";
+					$sql10="SELECT * FROM note";
 					$result10=mysqli_query($conn,$sql10);
+					$num=mysqli_num_rows($result10);
+					if($num>0)
+					{
+						$sum=0;
+						while($row=mysqli_fetch_assoc($result10))
+						{
+							$sum+=$row['nota'];
+						}
+					}
+					$medie=$sum/$num;
 					$nr=mysqli_num_rows($result8)+1;
-					$sql11="INSERT INTO medii(id_user,nr,medie) VALUES($id_user,$nr,$result10)";
+					$sql11="INSERT INTO medii(id_user,nr,medie) VALUES($id_user,$nr,$medie)";
+					$result11=mysqli_query($conn,$sql11);
 				}
 				else
 				{
@@ -443,16 +489,29 @@ font-size:18px;
 							{
 								while($row12=mysqli_fetch_assoc($result12))
 								{
-									$m1=$row['medie'];
-									$sql3="UPDATE medii SET medie=$m1 WHERE nr=$i";
+									$m1=$row12['medie'];
+									$sql13="UPDATE medii SET medie=$m1 WHERE nr=$i";
 									$result13=mysqli_query($conn,$sql13);
 								}
 							}
 
 						
 					}
-					$sql14="INSERT INTO medii(medie) VALUES($result10) WHERE nr=5";
+					$sql14="SELECT * FROM note";
 					$result14=mysqli_query($conn,$sql14);
+					$num=mysqli_num_rows($result14);
+					if($num>0)
+					{
+						$sum=0;
+						while($row=mysqli_fetch_assoc($result14))
+						{
+							$sum+=$row['nota'];
+						}
+					}
+					$medie=$sum/$num;
+					$nr=mysqli_num_rows($result8)+1;
+					$sql15="UPDATE  medii SET medie=$medie WHERE nr=5";
+					$result15=mysqli_query($conn,$sql15);
 					
 				}
 		}

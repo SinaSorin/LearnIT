@@ -30,6 +30,30 @@ session_start();
 	top:16%;
 	
   }
+  .poza {
+position:absolute;
+	top:20%;
+	left:37%
+}
+.logo {
+	position:absolute;
+	width:100%;
+	height:100%;
+	z-index:2;
+	background-color:#10BBB3;
+	animation:animatie 3s ease forwards;
+}
+@keyframes animatie{
+	0% {
+	opacity: 1;
+	}
+
+	100% {
+		
+		opacity: 0;
+		z-index:-3;
+	}
+}
   .divs {
 	background-color:white;
 	opacity:0.8;
@@ -252,7 +276,10 @@ font-size:18px;
   </style>
  </head>
  <body>
-
+<div class="logo">
+ <img src="logo.png" class="poza">
+ 
+ </div>
   <a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
   
  

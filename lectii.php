@@ -4,8 +4,8 @@ include_once 'include/dbh.inc.php';
  ?>
 <html>
  <head>
- <title>Index</title>
- <link rel="shortcut icon" href="motanel.png" type="image/png">
+ <title>Capitole</title>
+ <link rel="shortcut icon" href="logo2.png" type="image/png">
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -239,10 +239,11 @@ include_once 'include/dbh.inc.php';
 font-size:18px;
 }
 .bara {
-	position:fixed;
+	position:relative;
 	background-color:#10BBB3;
 	width:100%;
 	height:50px;
+	
 	z-index:2;
 }
 .row {
@@ -354,9 +355,27 @@ font-size:18px;
 	font-size:24px;
 	
 }
+.profil {
+	display:flex;
+	
+}
+.poza {
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	
+}
+.cont {
+	display:flex;
+	color:white;
+	font-size:18px;
+	margin-top:10px;
+}
   </style>
  </head>
  <body>
+ 
+ 
 <div class="bara">
 	<?php 
 	if(!isset($_SESSION['u_id']))
@@ -369,7 +388,25 @@ font-size:18px;
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
 					</form> ';
   ?>
+	  <div class="profil">
+  
+	<a href="index.php"><img src="logo.png" class="poza"></a>
+	<?php 
+	if(isset($_SESSION['u_id']))
+	{
+		$user_status=$_SESSION['u_status'];
+		$user=$_SESSION['u_uid'];
+	if($user_status==1)
+		echo "<a href='toti.php'><div class='cont'>$user</div></a>";
+	else
+		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
+	}
+	
+	
+	?>	
+	
   </div>
+	</div>
   
    
  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">

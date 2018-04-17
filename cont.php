@@ -1,29 +1,20 @@
-<?php
+<?php 
 session_start();
 include_once 'include/dbh.inc.php';
- ?>
-<html>
- <head>
- <title>Lectii</title>
- <link rel="shortcut icon" href="logo2.png" type="image/png">
- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+$id_user=$_SESSION['u_id'];
+?>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-  <style>
-  * {
-	
-	font-family:Helvetica;
-  }
-  body {
+<html>
+<head>
+<title>Profil</title>
+ <link rel="shortcut icon" href="logo2.png" type="image/png">
+<style>
+body {
 	background-color:#e5ebe7;
 	margin:0px;
 	padding:0px;
   }
- .divs {
+  .divs {
 	background-color:#10BBB3;
 	border:0px;
 	color:white;
@@ -42,7 +33,8 @@ include_once 'include/dbh.inc.php';
 	.divs:hover {
 		background-color:#208b86;
 	}
-	@import url(http://fonts.googleapis.com/css?family=Roboto);
+  
+  	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -239,10 +231,10 @@ include_once 'include/dbh.inc.php';
 font-size:18px;
 }
 .bara {
-	position:fixed;
+	position:relative;
 	background-color:#10BBB3;
 	width:100%;
-	height:50px;
+	height:6.5%;
 	z-index:2;
 }
 .row {
@@ -250,119 +242,84 @@ font-size:18px;
 	width:100%;
 	height:500px;
 }
-.content {
+.profil{
 	position:relative;
-	width:840px;
-	top:120px;
-	margin-left:auto;
-	margin-right:auto;
+	
+	background-color:#10BBB3;
+	width:20%;
+	height:80%;
 	
 }
-.capitol {
-	position:relative;
-	padding-top:80px;
-	width:200px;
-	height:200px;
-	margin-top:60px;
-	margin-left:60px;
-	display:inline-block;
-	background-color:#f5fff2;
-	font-size:24px;
-	font-family:Verdana;
-	text-align:center;
-	border:2px solid black;
-	border-radius:5%;
-	transition: .2s ease;
+.s1 {
+	width:100%;height:95%;
 }
-.overlay {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  background-color: #0c615e54;
-  overflow: hidden;
-  width: 100%;
-  height:0;
-  transition: .5s ease;
+.s2 {
+	width:25%; 
+	float:left;
+	background-color:#009999;
+	height:100%;
 }
-.capitol:hover {
-	color:#f5fff2;
-	transition: .2s ease;
-}
-.capitol:hover .overlay {
-  bottom: 0;
-  height: 100%;
-}
-.text {
-  white-space: nowrap; 
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-}
-.lectie {
-	
-	
-	color:black;
-	background-color:#d3f8e0a1;
-	padding-top:30px;
-	margin-left:10%;
-	border:2px solid black;
-	border-radius:12px;
-	
-	padding:24px;
-	margin-bottom:20px;
-	text-decoration:none;
-	padding-left:24px;
-}
-.lectie0 {
-	font-size:34;
-	font-weight:bold;
-	
-}
-.lectie:hover {
-	
-	background-color:#2e34395e;
-	cursor: pointer;
-	text-decoration:none;
-}
-.lectie1 {
-	font-size:20px;
-	font-weight:normal;
-	
-	
-}
-.lectie2 {
-	font-size:17px;
-	font-weight:normal;
-	float:right;
-	position:relative;
-	bottom:8px;
+.s3 {
+	heigh
+	width:75%; 
+	float:left;
+	height:100%;
 }
 
-.buton1{
-	border:0px;
-	background-color:transparent;
-	
+.inputfile {
+ width: 0.1px;
+ height: 0.1px;
+ opacity: 0;
+ overflow: hidden;
+ position: absolute;
+ z-index: -1;
 }
-.buton1:hover {
-	cursor:auto;
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+ padding:5px;
+    color: black;
+    background-color:white;
+    display: inline-block;
+ cursor: pointer;
 }
-.buton1:focus {
-	outline-color: transparent;
-	
+.inputfile + label:hover {
+    color: white;
+    background-color: black;
 }
-a:hover {
- 
- text-decoration:none;
+
+.profileimg{
+ padding: 4px;
+ width: 100px;
+ height: 50px;
+ margin: 20px;
+ border:none;
+ font-weight: 700;
+ background-color: #f3f3f3;
+ font-family":"arial";
+ font-size: 14px;
+ color: #111;
+ cursor: pointer;
+}
+.profileimg:hover {
+ background-color: #ccc;
 }
 .profil {
+	width:250px;
+	height:250px;
+	border-radius:50%;
+	position:relative;
+	top:120px;
+	left:60px;
+}
+.form {
+	position:relative;
+	top:150px;
+	left:20px;
+}
+.profil2{
 	display:flex;
-	margin-top:-14px;
+	
 }
 .poza {
 	width:50px;
@@ -376,22 +333,16 @@ a:hover {
 	font-size:18px;
 	margin-top:10px;
 }
-  </style>
- </head>
- <body>
-<div class="bara">
-	<?php 
-	if(!isset($_SESSION['u_id']))
-		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
+</style>
+</head>
+<body>
 
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
-	else
-		echo '<form action="include/logout.inc.php" method="POST" >
+<div class="bara">
+	<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
-					</form> ';
-  ?>
-   <div class="profil">
+		
+		</form>
+		<div class="profil2">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -406,110 +357,88 @@ a:hover {
 	}
 	
 	
-	?>	
-	
+	?>
   </div>
   </div>
-   
- <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  
-				</div>
-			</div>
-		  </div>
-		  
-	
 
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
-						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
-				  </form>
-					
-				 
-				</div>
-			</div>
-		  </div>
-	
-  <div class="content">
-   <?php
-
-$capitol=$_GET['subject'];
-$sql="SELECT * FROM lectii WHERE capitol='$capitol'";
-$result0=mysqli_query($conn,$sql);
-if(mysqli_num_rows($result0)>0){
-	while($row=mysqli_fetch_assoc($result0)){
-		$lectie=$row['titlu'];
-		$id=$row['id'];
-		$continut=$row['lectie'];
-		$descriere=substr($continut,0,strpos($continut,".")).".</p>";
-		echo "
-		<div class='lectie'>
-		<div class='lectie0'>$lectie</div>
-		<div class='lectie1'>
-		$descriere
-		
-		</div>
-		<a href='continutlectie.php?subject=$lectie & id_lectie=$id'class='link'><button class='lectie2'>Citeste mai mult</button></a>
-		</div>
-		"; 
+<section class="s1" >
+<section class="s2">
+<?php
+$sql="SELECT * FROM profileimg WHERE userid=$id_user";
+$result=mysqli_query($conn,$sql);
+if(mysqli_num_rows($result)>0)
+{
+	while($row=mysqli_fetch_assoc($result))
+	{
+		$src=$row['src'];
 	}
 }
-else
-	echo "Nu exista lectii";
+?>
+<img src="<?php 
+		echo $src ;
+?>"
+class="profil">
+ <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
+    <input type="file" name="file" id="file" class="inputfile" />
+     <label for="file">Schimba-ti poza de profil</label>
+    <button type='submit' name='submit' class="profileimg">UPLOAD</button> <!--personalizarea profilului -->
+    </form>
+</section>
+<section class="s3">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<canvas id="myChart" width="1115" height="600"></canvas>
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [<?php
+		$sql1="SELECT * FROM medii WHERE id_user=$id_user";
+		$result1=mysqli_query($conn,$sql1);
+		$labels=mysqli_num_rows($result1);
+		for($i=1;$i<=$labels-1;$i++)
+			echo "'$i',";
+		echo "'$labels'";
+		?>],
+        datasets: [{
+            label: "Evolutia ta",
+			fill: false,
+			lineTension: 0.1,
+			data: [
+			<?php
+			$data=array();
+			$i=0;
+				while($row=mysqli_fetch_assoc($result1))
+				{
+					$i++;
+					$data[$i]=$row['medie'];
+				}
+				for($i=1;$i<=$labels-1;$i++)
+					echo $data[$i].",";
+				echo $data[$labels];
 
 
 
-
-
-
-
-
- ?>
-	<?php
-	if(isset($_SESSION['u_status']))
-	if($_SESSION['u_status']==1 or $_SESSION['u_status']==2)
-	echo "
-	<a href='crearelectie.php'>
-	<div class='lectie'>
-		<center><div class='lectie0'>
-	
-	
-	Adauga lectie
-	
-			
-	
-			</div></center>
-		
-		
-		</div>
-	</a>
-  </div>"
-  ?>
- 
-  
-  
-  
-  
-  
-  
-  
-  
- </body>
+			?>],
+			backgroundColor: "rgba(75,192,192,0.4)",
+			borderColor: "rgba(75,192,192,1)",
+			borderCapStyle: 'butt',
+			borderDash: [],
+			borderDashOffset: 'miter',
+			pointBorderColor: "rgba(75,192,192,1)",
+			pointBackgroundColor: "#fff",
+			pointBorderWidth: 1,
+			pointHoverRadius: 5,
+			pointHoverBackgrundColor: "rgba(75,192,192,1)",
+			pointHoverBorderColor: "rgba(75,192,192,1)",
+			pointHoverBorderWidth: 2,
+			pointRadius: 10,
+			pointHitRadius: 10,
+        }]
+    }
+});
+</script>
+</section>
+</section>
+</body>
 </html>
