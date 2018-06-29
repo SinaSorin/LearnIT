@@ -15,6 +15,10 @@ if(isset($_POST['submit']))
 		$sql2="INSERT INTO test(id_user,id_lectie,titlu) VALUES($id_user,$id_lectie,'$titlu')";
 		$result2=mysqli_query($conn,$sql2);
 	}
+	else
+	{	$i=-1;
+		header("Location: grila.php?subject=$i");
+}
 }
 ?>
 <html>

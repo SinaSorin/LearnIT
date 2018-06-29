@@ -272,6 +272,21 @@ font-size:18px;
 	font-size:18px;
 	margin-top:10px;
 }
+.butoane {
+	position:absolute;
+	left:15%;
+	top:14px;
+}
+.butonn {
+	color:white;
+	margin-left:10px;
+	font-size:14;
+}
+.butonn:hover {
+	text-decoration:none;
+	color:black;
+}
+
 	</style>
 	
 	</head>
@@ -279,6 +294,26 @@ font-size:18px;
 	
 	<div class="bara">
 	<?php 
+	$id=$_GET['subject'];
+	$sql="SELECT * FROM test WHERE id='$id'";
+	$result=mysqli_query($conn,$sql);
+	if(mysqli_num_rows($result)>0)
+	{
+		while($row=mysqli_fetch_assoc($result))
+		{
+			$id_lectie=$row['id_lectie'];
+		}
+	}
+	$sql="SELECT * FROM lectii WHERE id='$id_lectie'";
+	$result=mysqli_query($conn,$sql);
+	if(mysqli_num_rows($result)>0)
+	{
+		while($row=mysqli_fetch_assoc($result))
+		{
+			$lectie=$row['titlu'];
+			$capitol=$row['capitol'];
+		}
+	}
 	if(!isset($_SESSION['u_id']))
 		echo '
 				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
@@ -288,8 +323,14 @@ font-size:18px;
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
 					</form> ';
+	echo "<div class='butoane'>";
+	
+	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
+	echo "<a href='lectiecapitol.php?subject=$capitol' class='butonn'>$capitol</a>";
+	echo "<a href='continutlectie.php?subject=$lectie & id_lectie=$id_lectie' class='butonn'>Lectie</a>";
+	echo "</div>";
   ?>
-   <div class="profil">
+    <div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -444,7 +485,7 @@ font-size:18px;
 			}
 		}
 		$nota=($corect/$i)*100;
-		echo $nota;
+		echo round($nota, 2);
 		$id_user=$_SESSION['u_id'];
 		$sql6="SELECT * FROM note WHERE id_user=$id_user AND id_test=$id";
 		$result6=mysqli_query($conn,$sql6);
@@ -462,7 +503,7 @@ font-size:18px;
 			else
 				if(mysqli_num_rows($result8)<5)
 				{
-					$sql10="SELECT * FROM note";
+					$sql10="SELECT * FROM note WHERE id_user=$id_user";
 					$result10=mysqli_query($conn,$sql10);
 					$num=mysqli_num_rows($result10);
 					if($num>0)
@@ -497,7 +538,7 @@ font-size:18px;
 
 						
 					}
-					$sql14="SELECT * FROM note";
+					$sql14="SELECT * FROM note WHERE id_user=$id_user";
 					$result14=mysqli_query($conn,$sql14);
 					$num=mysqli_num_rows($result14);
 					if($num>0)

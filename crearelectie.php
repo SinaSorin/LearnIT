@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	include_once 'include/dbh.inc.php';
+?>
 <html>
 <head>
 <title>Creare lectie</title>
@@ -312,8 +316,7 @@ font-size:18px;
 <div class="capitol" style="font-size:25px;"> Capitol:
 <select class="titlu2" name="capitol">
 	<?php
-	session_start();
-	include_once 'include/dbh.inc.php';
+	
 	$sql="SELECT * FROM capitole";
 	$result=mysqli_query($conn,$sql);
 	if(mysqli_num_rows($result)>0){

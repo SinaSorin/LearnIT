@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include_once 'include/dbh.inc.php';
 ?>
 <html>
 <head>
@@ -273,11 +274,34 @@ font-size:18px;
 	font-size:18px;
 	margin-top:10px;
 }
+.butoane {
+	position:absolute;
+	left:15%;
+	top:14px;
+}
+.butonn {
+	color:white;
+	margin-left:10px;
+}
+.butonn:hover {
+	text-decoration:none;
+	color:black;
+}
 </style>
 </head>
 <body>
 <div class="bara">
-	<?php 
+	<?php
+	$id_lectie=$_GET['id_lectie'];
+	$sql="SELECT * FROM lectii WHERE id='$id_lectie'";
+	$result=mysqli_query($conn,$sql);
+	if(mysqli_num_rows($result)>0)
+	{
+		while($row=mysqli_fetch_assoc($result))
+		{
+			$capitol=$row['capitol'];
+		}
+	}
 	if(!isset($_SESSION['u_id']))
 		echo '
 				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
@@ -287,6 +311,10 @@ font-size:18px;
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
 					</form> ';
+	echo "<div class='butoane'>";
+	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
+	echo "<a href='lectiecapitol.php?subject=$capitol' class='butonn'>$capitol</a>";
+	echo "</div>";
   ?>
   <div class="profil">
   
@@ -313,7 +341,7 @@ font-size:18px;
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
+				  <form action="include/login.inc.php" autocomplete="off" method="POST">
 						<input type="text" name="uid" placeholder="username"> 
 						<input type="password" name="pwd" placeholder="password">
 						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
@@ -347,7 +375,7 @@ font-size:18px;
 <div class="tot">
 <?php
 
-include_once 'include/dbh.inc.php';
+
 $titlu=$_GET['subject'];
 $id_lectie=$_GET['id_lectie'];
 $sql="SELECT * FROM lectii WHERE titlu='$titlu'";
@@ -381,16 +409,12 @@ else
 	$result=mysqli_query($conn,$sql);
 	if(mysqli_num_rows($result)>0)
 	{
-		
-		$nr_teste=0;
-		$ids= array();
 		while($row=mysqli_fetch_assoc($result))
 		{
-			$nr_teste++;
-			$ids[$nr_teste]=$row['id'];
+			$subject=$row['id'];
+			$titlu=$row['titlu'];
+			echo "<a href='exercitiu.php?subject=$subject'>$titlu</a><br/>";
 		}
-		for($i=1;$i<=$nr_teste;$i++)
-			echo "<a href='exercitiu.php?subject=$ids[$i]'>Test".$i."</a><br/>";
 	}
 	else
 	{

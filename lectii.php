@@ -254,11 +254,12 @@ font-size:18px;
 .content {
 	position:relative;
 	width:840px;
-	top:120px;
+	top:60px;
 	margin-left:auto;
 	margin-right:auto;
 	border-left:2px solid lightgray;
 	border-right:2px solid lightgray;
+	
 }
 .capitol1 {
 	position:relative;
@@ -267,14 +268,19 @@ font-size:18px;
 	height:200px;
 	margin-top:60px;
 	margin-left:60px;
-	display:inline-block;
+	display:inline-flex;
 	background-color:#f5fff2;
-	font-size:24px;
-	font-family:Verdana;
-	text-align:center;
+	
 	border:2px solid black;
 	border-radius:5%;
 	transition: .2s ease;
+}
+.nume{
+	font-size:24px;
+	font-family:Verdana;
+	text-align:center;
+	width:100%;
+	
 }
 .capitol2 {
 	position:relative;
@@ -371,6 +377,13 @@ font-size:18px;
 	font-size:18px;
 	margin-top:10px;
 }
+.cap {
+	position:relative;
+	font-size:40px;
+	font-weight:bold;
+	text-align:center;
+	margin-top:20px;
+}
   </style>
  </head>
  <body>
@@ -444,6 +457,8 @@ font-size:18px;
 				</div>
 			</div>
 		  </div>
+		  
+	<div class="cap">Capitole</div>
 	
   <div class="content">
     <?php
@@ -452,9 +467,13 @@ font-size:18px;
 	if(mysqli_num_rows($result) > 0){
 		while($row=mysqli_fetch_assoc($result)) {
 			$titlu=$row['titlu'];
-			echo "<div class='capitol1'>$titlu
-			<a href='lectiecapitol.php?subject=$titlu'><div class='overlay'>
-    <div class='text'>Vezi lectii</div></div></a>
+			echo "<div class='capitol1'>
+			<p class='nume'>$titlu</p>
+			<a href='lectiecapitol.php?subject=$titlu'>
+			<div class='overlay'>
+			<div class='text'>Vezi lectii</div>
+			</div>
+			</a>
 			
 			</div>";	
 		}

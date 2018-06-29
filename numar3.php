@@ -1,20 +1,116 @@
-<?php
+<?php 
 session_start();
 include_once 'include/dbh.inc.php';
- ?>
-<html>
- <head>
- <title>Lectii</title>
- <link rel="shortcut icon" href="logo2.png" type="image/png">
- <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-  <style>
-  * {
+$id_user=$_SESSION['u_id'];
+ if(isset($_POST['submit']))
+	{
+		$nr=$_POST['nr'];
+		$sql5="SELECT * FROM loto WHERE id_user=$id_user";
+		$result5=mysqli_query($conn,$sql5);
+		if(mysqli_num_rows($result5)==0)
+		{
+			$sql6="INSERT INTO loto(id_user,data) VALUES($id_user,CURDATE())";
+			$result6=mysqli_query($conn,$sql6);
+			 $sql7="SELECT * FROM numar";
+				 $result7=mysqli_query($conn,$sql7);
+				 if(mysqli_num_rows($result7)==1)
+				 {
+					 while($row=mysqli_fetch_assoc($result7))
+					 {
+						$nr_loto=$row['numar'];
+						if($nr==$nr_loto)
+							$xp=100;
+						else
+							if(abs($nr-$nr_loto)<=10)
+								$xp=20;
+							else
+								$xp=5;
+						$sql11="SELECT * FROM rank WHERE id_user=$id_user";
+							$result11=mysqli_query($conn,$sql11);
+							if(mysqli_num_rows($result11)>0)
+							{
+								while($row=mysqli_fetch_assoc($result11))
+								{
+									$exp=$row['xp'];
+									$exp=$exp+$xp;
+									$rank=$row['nivel'];
+									if($exp>$rank*100)
+									{
+										$rank=$rank+1;
+										$exp=$exp-$rank*100;
+									}
+									$sql="INSERT INTO rank(id_user,rank,xp) VALUES(1,1,1)";
+	$result=mysqli_query($conn,$sql);
+									
+								}
+								
+							}
+					 }
+				 }
+		}
+		else
+		{
+			
+				$sql9="UPDATE loto SET data=CURDATE() WHERE id_user=$id_user";
+				$result9=mysqli_query($conn,$sql9);
+				$sql10="SELECT * FROM numar";
+				$result10=mysqli_query($conn,$sql10);
+				if(mysqli_num_rows($result10)==1)
+				{
+					while($row=mysqli_fetch_assoc($result10))
+					{
+						
+						$nr_loto=$row['numar'];
+						if($nr==$nr_loto)
+						{
+							$xp=100;
+							$text="<p>Felicitari! Ai castigat un bonus de 100xp!<br>Revino si maine</p>";
+						}
+						else
+							if(abs($nr-$nr_loto)<=10)
+							{
+								$xp=20;
+								$text="<p>Ai fost foarte aproape! 20 xp pentru tine!<br>Mai incearca si maine!";
+							}
+							else
+							{
+								$xp=5;
+								$text="Nu te descuraja! +5xp!";
+								
+							}
+						$sql11="SELECT * FROM rank WHERE id_user=$id_user";
+							$result11=mysqli_query($conn,$sql11);
+							if(mysqli_num_rows($result11)>0)
+							{
+								while($row=mysqli_fetch_assoc($result11))
+								{
+									$exp=$row['xp'];
+									$exp=$exp+$xp;
+									$rank=$row['nivel'];
+									if($exp>=$rank*100)
+									{
+										$exp=$exp-$rank*100;
+										$rank=$rank+1;
+									}
+									$sql="UPDATE rank
+SET nivel = '$rank' , xp= '$exp'
+WHERE id_user ='$id_user';";
+	$result=mysqli_query($conn,$sql);
+									
+									
+								}
+								
+							}
+					 }
+				 }
+			
+		}
+	}
+	?>
+	<html>
+<head>
+<style>
+ * {
 	
 	font-family:Helvetica;
   }
@@ -23,7 +119,8 @@ include_once 'include/dbh.inc.php';
 	margin:0px;
 	padding:0px;
   }
- .divs {
+  
+  .divs {
 	background-color:#10BBB3;
 	border:0px;
 	color:white;
@@ -42,7 +139,6 @@ include_once 'include/dbh.inc.php';
 	.divs:hover {
 		background-color:#208b86;
 	}
-	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -239,126 +335,26 @@ include_once 'include/dbh.inc.php';
 font-size:18px;
 }
 .bara {
-	position:fixed;
+	position:relative;
 	background-color:#10BBB3;
 	width:100%;
 	height:50px;
 	z-index:2;
+	top:-2px;
 }
 .row {
 	
 	width:100%;
 	height:500px;
 }
-.content {
-	position:relative;
-	width:840px;
-	top:120px;
+.tot {
+	color:black;
+	width:70%;
+	height:90%;
 	margin-left:auto;
 	margin-right:auto;
-	
-}
-.capitol {
-	position:relative;
-	padding-top:80px;
-	width:200px;
-	height:200px;
-	margin-top:60px;
-	margin-left:60px;
-	display:inline-block;
-	background-color:#f5fff2;
-	font-size:24px;
-	font-family:Verdana;
-	text-align:center;
-	border:2px solid black;
-	border-radius:5%;
-	transition: .2s ease;
-}
-.overlay {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  right: 0;
-  background-color: #0c615e54;
-  overflow: hidden;
-  width: 100%;
-  height:0;
-  transition: .5s ease;
-}
-.capitol:hover {
-	color:#f5fff2;
-	transition: .2s ease;
-}
-.capitol:hover .overlay {
-  bottom: 0;
-  height: 100%;
-}
-.text {
-  white-space: nowrap; 
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-}
-.lectie {
-	
-	
-	color:black;
-	background-color:#d3f8e0a1;
-	padding-top:30px;
-	margin-left:10%;
-	border:2px solid black;
-	border-radius:12px;
-	
-	padding:24px;
-	margin-bottom:20px;
-	text-decoration:none;
-	padding-left:24px;
-}
-.lectie0 {
-	font-size:34;
-	font-weight:bold;
-	
-}
-.lectie:hover {
-	
-	background-color:#2e34395e;
-	cursor: pointer;
-	text-decoration:none;
-}
-.lectie1 {
-	font-size:20px;
-	font-weight:normal;
-	
-	
-}
-.lectie2 {
-	font-size:17px;
-	font-weight:normal;
-	float:right;
-	position:relative;
-	bottom:8px;
-}
-
-.buton1{
-	border:0px;
-	background-color:transparent;
-	
-}
-.buton1:hover {
-	cursor:auto;
-}
-.buton1:focus {
-	outline-color: transparent;
-	
-}
-a:hover {
- 
- text-decoration:none;
+	padding:12px;
+	margin-top:-15px;
 }
 .profil {
 	display:flex;
@@ -376,22 +372,87 @@ a:hover {
 	font-size:18px;
 	margin-top:10px;
 }
+.ruleta{
+	animation: rotatie 2s ease-in-out forwards;
+	width:100%;
+}
+@keyframes rotatie {
+	from{
+		transform: rotateX(0deg);	
+	}
+	to {
+		
+		transform: rotatez(180deg);
+	}
+}
+.btn {
+	background-color:#10BBB3;
+	width:fit-content;
+	display:inline;
+	padding:10px;
+	color:white;
+	border:1px solid black;
+	font-size:20px;
+}
+.btn:hover{
+	background-color:#208b86;
+	cursor:pointer;
+	
+}
+.numar {
+	position: relative;
+    margin-top: -33%;
+    font-size: 78;
+	text-align:center;
+	animation: numar 2s  2s ease-in-out forwards;
+	opacity: 0;
+}
+@keyframes numar {
+	from{
+		opacity: 0;
+	}
+	to {
+		
+		opacity: 1;
+	}
+}
+.rezultat {
+	position: relative;
+	margin-top:250px;
+	text-align:center;
+	animation: rezultat 2s  3s ease-in-out forwards;
+	visibility: hidden;
+	font-size:23px;
+	color:#10BBB3;
+	font-weight:bold;
+}
+@keyframes rezultat {
+	from{
+		visibility: hidden;
+	}
+	to {
+		
+		visibility: visible;
+	}
+}
 .butoane {
 	position:absolute;
 	left:15%;
-	
+	top:14px;
 }
 .butonn {
 	color:white;
-	
+	margin-left:10px;
+	font-size:14;
 }
 .butonn:hover {
-	
+	text-decoration:none;
 	color:black;
 }
-  </style>
- </head>
- <body>
+</style>
+</head>
+<body>
+
 <div class="bara">
 	<?php 
 	if(!isset($_SESSION['u_id']))
@@ -403,7 +464,6 @@ a:hover {
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
 					</form> ';
-		echo "<div class='butoane'><a href='lectii.php' class='butonn'>Capitole</a></div>";
   ?>
    <div class="profil">
   
@@ -418,14 +478,15 @@ a:hover {
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
-	
-	
+	echo "<div class='butoane'>";
+	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
+	echo "</div>";
 	?>	
 	
   </div>
   </div>
-   
- <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
@@ -446,7 +507,7 @@ a:hover {
     	  <div class="modal-dialog">
 				<div class="registermodal-container">
 					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" autocomplete="off" method="POST">
+				  <form action="include/signup.inc.php" method="POST">
 						<input type="text" name="user_first" placeholder="First name"> 
 						<input type="text" name="user_last" placeholder="Last name">
 						<input type="text" name="user" placeholder="Username">
@@ -460,69 +521,19 @@ a:hover {
 				</div>
 			</div>
 		  </div>
+	<div class="tot">
+	<div>
+	<img src="ruleta.png" class="ruleta">
+ </div>
 	
-  <div class="content">
-   <?php
-
-$capitol=$_GET['subject'];
-$sql="SELECT * FROM lectii WHERE capitol='$capitol'";
-$result0=mysqli_query($conn,$sql);
-if(mysqli_num_rows($result0)>0){
-	while($row=mysqli_fetch_assoc($result0)){
-		$lectie=$row['titlu'];
-		$id=$row['id'];
-		$continut=$row['lectie'];
-		$descriere=substr($continut,0,strpos($continut,".")).".</p>";
-		echo "
-		<div class='lectie'>
-		<div class='lectie0'>$lectie</div>
-		<div class='lectie1'>
-		$descriere
-		
-		</div>
-		<a href='continutlectie.php?subject=$lectie & id_lectie=$id'class='link'><button class='lectie2'>Citeste mai mult</button></a>
-		</div>
-		"; 
-	}
-}
-
-
-
-
-
-
-
-
-
- ?>
 	<?php
-	if(isset($_SESSION['u_status']))
-	if($_SESSION['u_status']==1 or $_SESSION['u_status']==2)
-	echo "
-	<a href='crearelectie.php'>
-	<div class='lectie'>
-		<center><div class='lectie0'>
+		echo "<div class='numar'>$nr</div>";
+		echo "<div class='rezultat'><p class='loto'>$nr_loto</p>";
+		echo $text.'</div>';
+
+	?>
+	</div>
 	
-	
-	Adauga lectie
-	
-			
-	
-			</div></center>
-		
-		
-		</div>
-	</a>
-  </div>"
-  ?>
  
-  
-  
-  
-  
-  
-  
-  
-  
- </body>
-</html>
+ <body>
+ </html>

@@ -280,19 +280,23 @@ font-size:18px;
  <img src="logo.png" class="poza">
  
  </div>
-  <a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
-  
- 
-  
-  <a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>
+ <?php 
+	if(!isset($_SESSION['u_id']))
+		echo '
+				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
 
-  
+				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
+	else
+		echo '<form action="include/logout.inc.php" method="POST" >
+					<input class="lr divs link" style="border:0px;" type="submit" name="submit" value="Log out"> 
+					</form> ';
+  ?>
    
  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
 					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
+				  <form action="include/login.inc.php" autocomplete="off" method="POST">
 						<input type="text" name="uid" placeholder="username"> 
 						<input type="password" name="pwd" placeholder="password">
 						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
@@ -327,8 +331,18 @@ font-size:18px;
   
    <div class="titlu divs">Ce vrei sa faci azi?</div>
    <div class="divs"><a href="lectii.php">Sa invat!</a></div>
-   <div class="divs">Sa lucrez!</div>
+<?php 
+if(isset($_SESSION['u_id']))
+{
+	echo "<div class='divs'><a href='salucrez.php'>Sa lucrez!</a></div>";
+}
+else
+{
+	echo "<div class='divs' title='Poti accesa acceasta pagina doar daca esti conectat!'>Sa lucrez!</div>";
+}
    
+   
+   ?>
   </center>
   
 

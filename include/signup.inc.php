@@ -50,8 +50,11 @@ if(isset($_POST['submit'])) {
 							if(mysqli_num_rows($result) > 0 ) {
 								while ($row = mysqli_fetch_assoc($result)) {
 									$userid=$row['user_id'];
-									$sql="INSERT INTO profileimg (userid,status) VALUES ($userid,1)";
+									$src="uploads/profiledefault.jpg";
+									$sql="INSERT INTO profileimg (userid,status,src) VALUES ($userid,1,'$src')";
 									mysqli_query($conn,$sql);//utilizatorul nu si-a ales o poza de profil: status -->1 ; utilizatorul isi alege poza status-->0
+									$sql="INSERT INTO rank (id_user,nivel,xp) VALUES ($userid,1,0)";
+									$result=mysqli_query($conn,$sql);
 									header("Location: ../index.php");
 								}
 

@@ -1,18 +1,20 @@
-<?php 
+<?php
 session_start();
 include_once 'include/dbh.inc.php';
-$id_user=$_SESSION['u_id'];
 ?>
-
 <html>
 <head>
 <style>
-body {
+ * {
+	
+	font-family:Helvetica;
+  }
+  body {
 	background-color:#e5ebe7;
 	margin:0px;
 	padding:0px;
-	font-size:22px;
   }
+  
   .divs {
 	background-color:#10BBB3;
 	border:0px;
@@ -21,7 +23,10 @@ body {
 	margin-bottom:32px;
 	padding:12px;
   }
-	
+	.titlu {
+		font-size:52px;
+		width:40%;
+	}
 	a {
 		text-decoration:none;
 		color:black;
@@ -29,8 +34,6 @@ body {
 	.divs:hover {
 		background-color:#208b86;
 	}
-  
-  	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -227,130 +230,30 @@ body {
 font-size:18px;
 }
 .bara {
-	position:fixed;
+	position:relative;
 	background-color:#10BBB3;
 	width:100%;
-	height:6.5%;
+	height:50px;
 	z-index:2;
+	top:-2px;
 }
 .row {
 	
 	width:100%;
 	height:500px;
 }
-.profil{
-	position:relative;
-	
-	background-color:#10BBB3;
-	width:20%;
-	height:80%;
-	
-}
-.s1 {
-	width:100%;
-	height:95%;
-	display:flex;
-}
-.s2 {
-	width:25%;
-	background-color:#009999;
-	height:105%;
-
-}
-.s3 {
-	width:37%;
-	height:100%;
-	padding:50px;
-	box-sizing:border-box;
-	
-}
-.s4 {
-	width:38%;
-	height:100%;
-	padding:50px;
-	box-sizing:border-box;
-}
-.upgrade {
-	font-size:17px;
-	background-color:#10BBB3;
-	border:1px solid black;
-	color:white;
-	float:right;
-	
-}
-.demote {
-	font-size:17px;
-	background-color:#bb1010;
-	border:1px solid black;
-	color:white;
-	float:right;
-	
-}
-form {
-display:inline;
-}
-.inputfile {
- width: 0.1px;
- height: 0.1px;
- opacity: 0;
- overflow: hidden;
- position: absolute;
- z-index: -1;
-}
-.inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
- padding:5px;
-    color: black;
-    background-color:white;
-    display: inline-block;
- cursor: pointer;
-}
-.inputfile + label:hover {
-    color: white;
-    background-color: black;
-}
-
-.profileimg{
- padding: 4px;
- width: 100px;
- height: 50px;
- margin: 20px;
- border:none;
- font-weight: 700;
- background-color: #f3f3f3;
- font-family":"arial";
- font-size: 14px;
- color: #111;
- cursor: pointer;
-}
-.profileimg:hover {
- background-color: #ccc;
+.tot {
+	color:black;
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+	padding:12px;
+	padding-top:15px;
+	margin-top:10px;
 }
 .profil {
-	width:250px;
-	height:250px;
-	border-radius:50%;
-	position:relative;
-	top:120px;
-	left:60px;
-}
-.form {
-	position:relative;
-	top:150px;
-	left:20px;
-}
-.helper {
-	color:#bb1010;
-	font-size:30px;
-}
-.incepator {
-	color:#10BBB3;
-	font-size:30px;
-}
-.profil2 {
 	display:flex;
-	
+	margin-top:-14px;
 }
 .poza {
 	width:50px;
@@ -364,24 +267,76 @@ display:inline;
 	font-size:18px;
 	margin-top:10px;
 }
-.poza1 {
-	width:20px;
-	position:absolute;
+.ruleta{
+	animation: rotatie 2s ease-in-out forwards;
+	width:100%;
+}
+@keyframes rotaties {
+	from{
+		transform: rotateX(0deg);	
+	}
+	to {
+		
+		transform: rotatez(180deg);
+	}
+}
+.numar {
+	position: relative;
+    margin-top: -33%;
+    font-size: 78;
+	text-align:center;
+	background-color: #e5ebe7;
+}
+.btn {
+	background-color:#10BBB3;
+	width:fit-content;
+	display:inline;
+	padding:10px;
+	color:white;
+	border:1px solid black;
+	font-size:20px;
+}
+.btn:hover{
+	background-color:#208b86;
+	cursor:pointer;
 	
 }
-.nume {
-	margin-left:20px;
-	
+.deja {
+	text-align:center;
+	margin-top:200px;
+	font-size:30px;
+}
+.butoane {
+	position:absolute;
+	left:15%;
+	top:14px;
+}
+.butonn {
+	color:white;
+	margin-left:10px;
+	font-size:14;
+}
+.butonn:hover {
+	text-decoration:none;
+	color:black;
 }
 </style>
 </head>
 <body>
-
+http://www.mangago.me/read-manga/an_uncomfortable_truth/mf/manga/an_uncomfortable_truth/c049/14/
 <div class="bara">
-	<form action="include/logout.inc.php" method="POST" >
+	<?php 
+	if(!isset($_SESSION['u_id']))
+		echo '
+				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
+
+				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
+	else
+		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
-				</form>
-	<div class="profil2">
+					</form> ';
+  ?>
+   <div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -394,148 +349,97 @@ display:inline;
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
+	echo "<div class='butoane'>";
+	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
+	echo "</div>";
+	?>	
 	
-	
-	?>
   </div>
   </div>
-  
-<section class="s1" >
-<section class="s2">
-<?php
-$sql="SELECT * FROM profileimg WHERE userid=$id_user";
-$result=mysqli_query($conn,$sql);
-if(mysqli_num_rows($result)>0)
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="loginmodal-container">
+					<h1>Login to Your Account</h1><br>
+				  <form action="include/login.inc.php" method="POST">
+						<input type="text" name="uid" placeholder="username"> 
+						<input type="password" name="pwd" placeholder="password">
+						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
+				  </form>
+					
+				  
+				</div>
+			</div>
+		  </div>
+		  
+	
+
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="registermodal-container">
+					<h1>Sign up</h1><br>
+				  <form action="include/signup.inc.php" method="POST">
+						<input type="text" name="user_first" placeholder="First name"> 
+						<input type="text" name="user_last" placeholder="Last name">
+						<input type="text" name="user" placeholder="Username">
+						<input type="text" name="user_email" placeholder="Email">
+						<input type="password" name="pwd" placeholder="Password">
+						<input type="password" name="pwd2" placeholder="Confirm password">
+						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
+				  </form>
+					
+				 
+				</div>
+			</div>
+		  </div>
+		  <?php
+
+if(isset($_SESSION['u_id']))
 {
-	while($row=mysqli_fetch_assoc($result))
-	{
-		$src=$row['src'];
-	}
-}
-?>
-<img src="<?php 
-		echo $src ;
-?>"
-class="profil">
- <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
-    <input type="file" name="file" id="file" class="inputfile" />
-     <label for="file">Schimba-ti poza de profil</label>
-    <button type='submit' name='submit' class="profileimg">UPLOAD</button> <!--personalizarea profilului -->
-    </form>
-</section>
-<section class="s3">
-<p class="helper"><strong> Ajutoare</strong></p>
-<?php
-	$sql1="SELECT * FROM user WHERE user_status=2";
+	$id_user=$_SESSION['u_id'];
+	$sql1="SELECT * FROM numar";
 	$result1=mysqli_query($conn,$sql1);
-	if(mysqli_num_rows($result1)>0)
+	if(mysqli_num_rows($result1)==0)
 	{
-		echo "<ol>";
-		while($row=mysqli_fetch_assoc($result1))
+		$numar=mt_rand(1,100);
+		$sql2="INSERT INTO numar(numar,data) VALUES($numar,CURDATE())";
+		$result2=mysqli_query();
+	}
+	else {
+		$sql3="SELECT * FROM numar WHERE data=CURDATE()";
+		$result3=mysqli_query($conn,$sql3);
+		if(mysqli_num_rows($result3)==0)
 		{
-			$id=$row['user_id'];
-			$user=$row['user_uid'];
-			$sql10="SELECT * FROM note WHERE id_user=$id";
-					$result10=mysqli_query($conn,$sql10);
-					$num=mysqli_num_rows($result10);
-					if($num>0)
-					{
-						$sum=0;
-						while($row=mysqli_fetch_assoc($result10))
-						{
-							$sum+=$row['nota'];
-						}
-						$medie=$sum/$num;
-						$medie=round($medie,2);
-					}
-					else
-						$medie=0;
-					$sql11="SELECT * FROM profileimg WHERE userid='$id'";
-				$result11=mysqli_query($conn,$sql11);
-				if(mysqli_num_rows($result11)>0)
-				{
-					while($row=mysqli_fetch_assoc($result11))
-					{
-						$src=$row['src'];
-					}
-					
-				}
-					
-			echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie;
-			echo "<form method='POST' action='include\demote.inc.php?subject=$id'>
-					  <input type='submit' class='demote' value='Demote' name='submit$id'>
-					  </form>";
-			echo "</div></li>";
+			$numar=mt_rand(0,100);
+			$sql4="UPDATE numar SET numar=$numar,data=CURDATE()";
+			$result4=mysqli_query($conn,$sql4);
 		}
-		echo '</ol>';
+
+	}
+	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
+			$result8=mysqli_query($conn,$sql8);
+			if(mysqli_num_rows($result8)==0)
+			{
+				echo "<div class='tot'>
+	
+	
+				<div>
+					<img src='ruleta.png' class='ruleta'>
+	
+
+		<form method='POST' action='numar3.php'>
+			<center>
+			<input type='number' min='1' max='100' autofocus class='numar' name='nr' required /></br>
+			
+			<input type='submit' value='submit' class='btn' name='submit' required />
+			</center>
+		</form>
+ </div>
+ </div>";
 	}
 	else 
-		echo "Momenta nu exita ajutoare.";
+echo '<div class="deja">Deja ai facut provocarea azi! Incearca maine!</div>';}
+	?>
 	
-
-		
-
-
-
-
-
-?>
-</section>
-<section class="s4">
-<p class="incepator"><strong>Incepatori</strong></p>
-<?php
-$sql2="SELECT * FROM user WHERE user_status=3";
-		$result2=mysqli_query($conn,$sql2);
-		if(mysqli_num_rows($result2)>0)
-		{
-			echo "<ol>";
-			
-			while($row=mysqli_fetch_assoc($result2))
-			{
-				$id=$row['user_id'];
-				$user=$row['user_uid'];
-				$sql10="SELECT * FROM note WHERE id_user=$id";
-					$result10=mysqli_query($conn,$sql10);
-					$num=mysqli_num_rows($result10);
-					if($num>0)
-					{
-						$sum=0;
-						while($row=mysqli_fetch_assoc($result10))
-						{
-							$sum+=$row['nota'];
-						}
-						$medie=$sum/$num;
-						$medie=round($medie,2);
-					}
-					else
-						$medie=0;
-				$sql11="SELECT * FROM profileimg WHERE userid='$id'";
-				$result11=mysqli_query($conn,$sql11);
-				if(mysqli_num_rows($result11)>0)
-				{
-					while($row=mysqli_fetch_assoc($result11))
-					{
-						$src=$row['src'];
-					}
-					
-				}
-				
-				echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie;
-				echo "<form method='POST' action='include\upgrade.inc.php?subject=$id'>
-					  <input type='submit' class='upgrade' value='Upgrade' name='submit$id'>
-					  </form>";
-				echo "</div></li>";
-			}
-			echo "</ol>";
-		}
-		else
-			echo "Momentan nu exista incepatori.";
-
-
-
-
- ?>
-</section>
-</section>
-</body>
-</html>
+ <body>
+ </html>
