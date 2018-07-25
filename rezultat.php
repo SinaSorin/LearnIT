@@ -99,6 +99,14 @@ font-size:18px;
 	text-decoration:none;
 	color:black;
 }
+.gresit {
+	color:red;
+	font-weight:bold;
+}
+.corect {
+	color:green;
+	font-weight:bold;
+}
 </style>
 </head>
 <body>
@@ -121,7 +129,7 @@ font-size:18px;
 	}
 		echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
-	echo "<a href='testecod.php' class='butonn'>Probleme</a>";
+	echo "<a href='testedrag.php' class='butonn'>Exercitii</a>";
 	echo "</div>";
 	
 	?>	
@@ -129,6 +137,7 @@ font-size:18px;
   </div>
   </div>
 <div class="tot">
+<div class='cod'>
 <?php
 
 $id_user=$_SESSION['u_id'];
@@ -159,21 +168,25 @@ if(mysqli_num_rows($result2)>0)
 ksort($variante);
 $a=0;
 $corect=array_values($variante);
-
+ 
+ 
 
 $total=100;
 $gresit=ceil(100/$i);
 for($a=1;$a<=$i;$a++)
 {	$raspuns=$_POST["id$a"];
 	$b=$a-1;
-	if(strcmp($raspuns,$corect[$a-1])!=0)
+	if(strcmp($raspuns,$corect[$b])!=0)
 	{$total=$total-$gresit;
-	
+	  $cod=str_replace("$corect[$b]","<span class='gresit'>$raspuns</span>","$cod");
 	}
+	else
+		$cod=str_replace("$corect[$b]","<span class='corect'>$raspuns</span>","$cod");
 }
+echo $cod;
 if($total<0)
 	$total=0;
-
+echo '</div><br>Xp obtinut: ';
 echo $total;
 
 $sql3="SELECT * FROM rank WHERE id_user=$id_user";
@@ -200,6 +213,7 @@ $sql3="SELECT * FROM rank WHERE id_user=$id_user";
 								
 		}
 ?>
+
 </div>
 </body>
 </html>

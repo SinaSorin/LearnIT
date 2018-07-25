@@ -331,7 +331,7 @@ if(mysqli_num_rows($result2)>0)
 	{
 		$status=$row2['user_status'];
 		if($status==1 or $status==2)
-			echo "<a href='crearetestcod.php' class='creaza'><button>Creeaza o problema</button></a>";
+			echo "<a href='creareex.php' class='creaza'><button>Creeaza o problema</button></a>";
 	}
 }
 

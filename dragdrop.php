@@ -320,7 +320,7 @@ font-size:18px;
 	}
 		echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
-	echo "<a href='testecod.php' class='butonn'>Probleme</a>";
+	echo "<a href='testedrag.php' class='butonn'>Exercitii</a>";
 	echo "</div>";
 	
 	?>	

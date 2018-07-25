@@ -403,6 +403,18 @@ progress {
 			$src=$row['robot'];
 		}
 	}
+	else 
+	{
+		$sql="SELECT * FROM robot WHERE rank=4";
+	$result=mysqli_query($conn,$sql);
+	if(mysqli_num_rows($result))
+	{
+		while($row=mysqli_fetch_assoc($result))
+		{
+			$src=$row['robot'];
+		}
+	}
+	}
 	echo "
 	<img src='$src' class='robot'>
 	<a href='robot.php'>
