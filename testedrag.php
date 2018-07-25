@@ -4,18 +4,21 @@ include_once 'include/dbh.inc.php';
 ?>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
- * {
-	
+	*{
+	font-size:22px;	
 	font-family:Helvetica;
-  }
-  body {
-	background-color:#e5ebe7;
-	margin:0px;
-	padding:0px;
-  }
-  
-  .divs {
+	}
+	body{
+		background-color:#e5ebe7;
+		margin:0px;
+		padding:0px;
+	}
+	.divs {
 	background-color:#10BBB3;
 	border:0px;
 	color:white;
@@ -23,10 +26,7 @@ include_once 'include/dbh.inc.php';
 	margin-bottom:32px;
 	padding:12px;
   }
-	.titlu {
-		font-size:52px;
-		width:40%;
-	}
+	
 	a {
 		text-decoration:none;
 		color:black;
@@ -34,6 +34,8 @@ include_once 'include/dbh.inc.php';
 	.divs:hover {
 		background-color:#208b86;
 	}
+  
+  	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -235,25 +237,15 @@ font-size:18px;
 	width:100%;
 	height:50px;
 	z-index:2;
-	top:-2px;
 }
 .row {
 	
 	width:100%;
 	height:500px;
 }
-.tot {
-	color:black;
-	width:70%;
-	margin-left:auto;
-	margin-right:auto;
-	padding:12px;
-	padding-top:15px;
-	margin-top:10px;
-}
 .profil {
 	display:flex;
-	margin-top:-14px;
+	
 }
 .poza {
 	width:50px;
@@ -267,44 +259,24 @@ font-size:18px;
 	font-size:18px;
 	margin-top:10px;
 }
-.ruleta{
-	animation: rotatie 2s ease-in-out forwards;
-	width:100%;
+.tot {
+	color:black;
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+	padding:12px;
+	padding-top:15px;
+	background-color:#ffffffb5;
+	margin-top:30px;
 }
-@keyframes rotaties {
-	from{
-		transform: rotateX(0deg);	
-	}
-	to {
-		
-		transform: rotatez(180deg);
-	}
+.glyphicon-ok {
+	color:green;
 }
-.numar {
-	position: relative;
-    margin-top: -33%;
-    font-size: 78;
-	text-align:center;
-	background-color: #e5ebe7;
+.glyphicon-remove {
+	color:red;
 }
-.btn {
-	background-color:#10BBB3;
-	width:fit-content;
-	display:inline;
-	padding:10px;
-	color:white;
-	border:1px solid black;
-	font-size:20px;
-}
-.btn:hover{
-	background-color:#208b86;
-	cursor:pointer;
-	
-}
-.deja {
-	text-align:center;
-	margin-top:200px;
-	font-size:30px;
+.creaza {
+	float:right;	
 }
 .butoane {
 	position:absolute;
@@ -324,23 +296,16 @@ font-size:18px;
 </head>
 <body>
 <div class="bara">
-	<?php 
-	if(!isset($_SESSION['u_id']))
-		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
-
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
-	else
-		echo '<form action="include/logout.inc.php" method="POST" >
+	<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
-					</form> ';
-  ?>
-   <div class="profil">
+					</form>
+	   <div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
 	if(isset($_SESSION['u_id']))
 	{
+		$id_user=$_SESSION['u_id'];
 		$user_status=$_SESSION['u_status'];
 		$user=$_SESSION['u_uid'];
 	if($user_status==1)
@@ -351,94 +316,60 @@ font-size:18px;
 	echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
 	echo "</div>";
+	
 	?>	
 	
   </div>
   </div>
-
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  
-				</div>
-			</div>
-		  </div>
-		  
-	
-
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
-						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
-				  </form>
-					
-				 
-				</div>
-			</div>
-		  </div>
-		  <?php
-
-if(isset($_SESSION['u_id']))
+<div class="tot">
+<?php
+$sql2="SELECT * FROM user WHERE user_id='$id_user'";
+$result2=mysqli_query($conn,$sql2);
+if(mysqli_num_rows($result2)>0)
 {
-	$id_user=$_SESSION['u_id'];
-	$sql1="SELECT * FROM numar";
-	$result1=mysqli_query($conn,$sql1);
-	if(mysqli_num_rows($result1)==0)
+	while($row2=mysqli_fetch_assoc($result2))
 	{
-		$numar=mt_rand(1,100);
-		$sql2="INSERT INTO numar(numar,data) VALUES($numar,CURDATE())";
-		$result2=mysqli_query();
+		$status=$row2['user_status'];
+		if($status==1 or $status==2)
+			echo "<a href='crearetestcod.php' class='creaza'><button>Creeaza o problema</button></a>";
 	}
-	else {
-		$sql3="SELECT * FROM numar WHERE data=CURDATE()";
-		$result3=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result3)==0)
+}
+
+$sql="SELECT * FROM dragdrop";
+$result=mysqli_query($conn,$sql);
+if(mysqli_num_rows($result)>0)
+{
+	$nr=mysqli_num_rows($result);
+	$i=0;
+	while($row=mysqli_fetch_assoc($result))
+	{
+		$i++;
+		$id=$row['id'];
+		if($id_user==$row['id_user'])
+			echo "<p title='Nu poti rezolva propriile teste!'>Exercitiu$i <span class='glyphicon glyphicon-remove'></span> </p>";
+		else
 		{
-			$numar=mt_rand(0,100);
-			$sql4="UPDATE numar SET numar=$numar,data=CURDATE()";
-			$result4=mysqli_query($conn,$sql4);
+			$sql1="SELECT * FROM user_cod WHERE id_user='$id_user' AND id_test='$id'";
+			$result1=mysqli_query($conn,$sql1);
+			if(mysqli_num_rows($result1)>0)
+				echo "<p><a href='dragdrop.php?subject=$id'>xercitiu$i</a><span class='glyphicon glyphicon-ok'></span></p> ";
+			else	
+				echo "<p><a href='dragdrop.php?subject=$id'>Exercitiu$i</a></p>";
 		}
-
+		
 	}
-	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
-			$result8=mysqli_query($conn,$sql8);
-			if(mysqli_num_rows($result8)==0)
-			{
-				echo "<div class='tot'>
 	
-	
-				<div>
-					<img src='ruleta.png' class='ruleta'>
-	
+}
 
-		<form method='POST' action='numar3.php'>
-			<center>
-			<input type='number' min='1' max='100' autofocus class='numar' name='nr' required /></br>
-			
-			<input type='submit' value='submit' class='btn' name='submit' required />
-			</center>
-		</form>
- </div>
- </div>";
-	}
-	else 
-echo '<div class="deja">Deja ai facut provocarea azi! Incearca maine!</div>';}
-	?>
-	
- <body>
- </html>
+
+
+
+
+
+
+
+
+?>
+</div>
+</body>
+</html>

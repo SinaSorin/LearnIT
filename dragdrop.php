@@ -1,21 +1,20 @@
 <?php
-session_start();
-include_once 'include/dbh.inc.php';
+	session_start();
+	include_once 'include/dbh.inc.php';
 ?>
 <html>
 <head>
 <style>
- * {
-	
+*{
+	font-size:22px;	
 	font-family:Helvetica;
-  }
-  body {
-	background-color:#e5ebe7;
-	margin:0px;
-	padding:0px;
-  }
-  
-  .divs {
+	}
+	body{
+		background-color:#e5ebe7;
+		margin:0px;
+		padding:0px;
+	}
+	.divs {
 	background-color:#10BBB3;
 	border:0px;
 	color:white;
@@ -23,10 +22,7 @@ include_once 'include/dbh.inc.php';
 	margin-bottom:32px;
 	padding:12px;
   }
-	.titlu {
-		font-size:52px;
-		width:40%;
-	}
+	
 	a {
 		text-decoration:none;
 		color:black;
@@ -34,6 +30,8 @@ include_once 'include/dbh.inc.php';
 	.divs:hover {
 		background-color:#208b86;
 	}
+  
+  	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -218,9 +216,6 @@ include_once 'include/dbh.inc.php';
   opacity: 0.6;
   transition: opacity ease 0.5s;
 } 
-
-
-
 .lr {
 	position:relative;
 	float: right;
@@ -235,25 +230,15 @@ font-size:18px;
 	width:100%;
 	height:50px;
 	z-index:2;
-	top:-2px;
 }
 .row {
 	
 	width:100%;
 	height:500px;
 }
-.tot {
-	color:black;
-	width:70%;
-	margin-left:auto;
-	margin-right:auto;
-	padding:12px;
-	padding-top:15px;
-	margin-top:10px;
-}
 .profil {
 	display:flex;
-	margin-top:-14px;
+	
 }
 .poza {
 	width:50px;
@@ -267,44 +252,22 @@ font-size:18px;
 	font-size:18px;
 	margin-top:10px;
 }
-.ruleta{
-	animation: rotatie 2s ease-in-out forwards;
-	width:100%;
+.tot {
+	color:black;
+	width:70%;
+	margin-left:auto;
+	margin-right:auto;
+	box-sizing:border-box;
+	padding-top:15px;
+	padding:30px;
+	background-color:#ffffffb5;
+	margin-top:30px;
 }
-@keyframes rotaties {
-	from{
-		transform: rotateX(0deg);	
-	}
-	to {
-		
-		transform: rotatez(180deg);
-	}
-}
-.numar {
-	position: relative;
-    margin-top: -33%;
-    font-size: 78;
-	text-align:center;
-	background-color: #e5ebe7;
-}
-.btn {
-	background-color:#10BBB3;
-	width:fit-content;
-	display:inline;
-	padding:10px;
-	color:white;
-	border:1px solid black;
-	font-size:20px;
-}
-.btn:hover{
-	background-color:#208b86;
-	cursor:pointer;
+.cod {
+	border:2px solid #10BBB3;
+	border-radius:20px;
+	padding:30px;
 	
-}
-.deja {
-	text-align:center;
-	margin-top:200px;
-	font-size:30px;
 }
 .butoane {
 	position:absolute;
@@ -320,22 +283,29 @@ font-size:18px;
 	text-decoration:none;
 	color:black;
 }
+.div2{
+	width: 80px;
+    min-height: 25px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+	-moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+}
+.variante {
+	display:flex;
+	margin:20px;
+}
 </style>
 </head>
 <body>
-<div class="bara">
-	<?php 
-	if(!isset($_SESSION['u_id']))
-		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
 
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
-	else
-		echo '<form action="include/logout.inc.php" method="POST" >
+<div class="bara">
+	<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
-					</form> ';
-  ?>
-   <div class="profil">
+					</form>
+	   <div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -348,97 +318,83 @@ font-size:18px;
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
-	echo "<div class='butoane'>";
+		echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
+	echo "<a href='testecod.php' class='butonn'>Probleme</a>";
 	echo "</div>";
+	
 	?>	
 	
   </div>
   </div>
+<div class="tot">
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  
-				</div>
-			</div>
-		  </div>
-		  
-	
-
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
-						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
-				  </form>
-					
-				 
-				</div>
-			</div>
-		  </div>
-		  <?php
-
-if(isset($_SESSION['u_id']))
-{
-	$id_user=$_SESSION['u_id'];
-	$sql1="SELECT * FROM numar";
-	$result1=mysqli_query($conn,$sql1);
-	if(mysqli_num_rows($result1)==0)
+<?php
+	$id=$_GET['subject'];
+	$sql1="SELECT * FROM dragdrop WHERE id=$id";
+	$result=mysqli_query($conn,$sql1);
+	if(mysqli_num_rows($result)>0)
 	{
-		$numar=mt_rand(1,100);
-		$sql2="INSERT INTO numar(numar,data) VALUES($numar,CURDATE())";
-		$result2=mysqli_query();
-	}
-	else {
-		$sql3="SELECT * FROM numar WHERE data=CURDATE()";
-		$result3=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result3)==0)
+		while($row=mysqli_fetch_assoc($result))
 		{
-			$numar=mt_rand(0,100);
-			$sql4="UPDATE numar SET numar=$numar,data=CURDATE()";
-			$result4=mysqli_query($conn,$sql4);
+			$enunt=$row['enunt'];
+			echo $enunt;
+			$cod=$row['cod'];		
 		}
-
 	}
-	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
-			$result8=mysqli_query($conn,$sql8);
-			if(mysqli_num_rows($result8)==0)
+	$variante=array();
+	$nr=0;
+	$sql2="SELECT * FROM variante WHERE id_test=$id";
+	$result2=mysqli_query($conn,$sql2);
+	if(mysqli_num_rows($result2)>0)
+	{
+		while($row=mysqli_fetch_assoc($result2))
+		{
+			$varianta=$row['varianta'];
+			$nr++;
+			$variante[$nr]=$varianta;
+			if($row['corect']==1)
 			{
-				echo "<div class='tot'>
-	
-	
-				<div>
-					<img src='ruleta.png' class='ruleta'>
-	
-
-		<form method='POST' action='numar3.php'>
-			<center>
-			<input type='number' min='1' max='100' autofocus class='numar' name='nr' required /></br>
-			
-			<input type='submit' value='submit' class='btn' name='submit' required />
-			</center>
-		</form>
- </div>
- </div>";
+				$varianta=$varianta."<span></span>";
+				$cod=str_replace("$varianta","<div id='d$nr' class='div2' ondrop='drop(event)' ondragover='allowDrop(event)'></div><input id='id$nr' style='display:none' name='id$nr' form='form' required>","$cod");
+				
+			}
+		}	
 	}
-	else 
-echo '<div class="deja">Deja ai facut provocarea azi! Incearca maine!</div>';}
-	?>
+	echo "<br><br><div class='cod'>";
+	echo $cod;
+	echo '</div>';
+	echo '<div class="variante">';
+	for($i=1;$i<=$nr;$i++)
+		echo "<div id='div1' class='div2' ondrop='drop(event)' ondragover='allowDrop(event)'><div id='$variante[$i]' draggable='true' ondragstart='drag(event)' >".$variante[$i]."</div></div>  ";
+	echo '</div>';
 	
- <body>
- </html>
+	
+?>
+
+<form id="form" method="POST" action="rezultat.php?subject=<?php echo $id;?>">
+	<input type="submit" style="margin-left:30px;" name="submit">
+</form>
+</div>
+
+<script>
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+	var nume='i'+ev.target.id;
+	document.getElementById(nume).value=ev.target.textContent;
+	
+}
+</script>
+
+</body>
+</html>

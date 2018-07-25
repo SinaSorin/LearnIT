@@ -1,19 +1,49 @@
 <?php
-session_start();
-include_once 'include/dbh.inc.php';
-?>
+	session_start();
+	include_once 'include/dbh.inc.php';
+	$i=0;
+	$j=0
+	
+	?>
 <html>
 <head>
-<style>
- * {
+<title>Creare exercitiu</title>
+ <link rel="shortcut icon" href="logo2.png" type="image/png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" /><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" /></head>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
+  <style>
+* {
 	
 	font-family:Helvetica;
   }
-  body {
+body{
 	background-color:#e5ebe7;
 	margin:0px;
 	padding:0px;
-  }
+}
+.text {
+	width:80%;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:40px;
+}
+.titlu {
+	margin-bottom:20px;
+	font-size:25px;
+}
+.titlu2 {
+	margin-bottom:20px;
+	font-size:25px;
+}
+.capitol {
+	margin-left:40px;
+	display:inline;
+}
+.submit {
+	margin-top:20px;
+}
   
   .divs {
 	background-color:#10BBB3;
@@ -23,10 +53,7 @@ include_once 'include/dbh.inc.php';
 	margin-bottom:32px;
 	padding:12px;
   }
-	.titlu {
-		font-size:52px;
-		width:40%;
-	}
+	
 	a {
 		text-decoration:none;
 		color:black;
@@ -34,6 +61,8 @@ include_once 'include/dbh.inc.php';
 	.divs:hover {
 		background-color:#208b86;
 	}
+  
+  	@import url(http://fonts.googleapis.com/css?family=Roboto);
 
 /****** LOGIN MODAL ******/
 .loginmodal-container {
@@ -235,25 +264,15 @@ font-size:18px;
 	width:100%;
 	height:50px;
 	z-index:2;
-	top:-2px;
 }
 .row {
 	
 	width:100%;
 	height:500px;
 }
-.tot {
-	color:black;
-	width:70%;
-	margin-left:auto;
-	margin-right:auto;
-	padding:12px;
-	padding-top:15px;
-	margin-top:10px;
-}
 .profil {
 	display:flex;
-	margin-top:-14px;
+	
 }
 .poza {
 	width:50px;
@@ -266,26 +285,6 @@ font-size:18px;
 	color:white;
 	font-size:18px;
 	margin-top:10px;
-}
-.ruleta{
-	animation: rotatie 2s ease-in-out forwards;
-	width:100%;
-}
-@keyframes rotaties {
-	from{
-		transform: rotateX(0deg);	
-	}
-	to {
-		
-		transform: rotatez(180deg);
-	}
-}
-.numar {
-	position: relative;
-    margin-top: -33%;
-    font-size: 78;
-	text-align:center;
-	background-color: #e5ebe7;
 }
 .btn {
 	background-color:#10BBB3;
@@ -301,10 +300,11 @@ font-size:18px;
 	cursor:pointer;
 	
 }
-.deja {
-	text-align:center;
-	margin-top:200px;
-	font-size:30px;
+.date {
+	position:relative;
+	margin-right:10px;
+	margin-top:20px;
+	font-size: 18px;
 }
 .butoane {
 	position:absolute;
@@ -321,21 +321,12 @@ font-size:18px;
 	color:black;
 }
 </style>
-</head>
 <body>
 <div class="bara">
-	<?php 
-	if(!isset($_SESSION['u_id']))
-		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
-
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
-	else
-		echo '<form action="include/logout.inc.php" method="POST" >
+	<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
-					</form> ';
-  ?>
-   <div class="profil">
+					</form>
+	   <div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -348,97 +339,168 @@ font-size:18px;
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
-	echo "<div class='butoane'>";
+		echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
+	echo "<a href='testecod.php' class='butonn'>Probleme</a>";
 	echo "</div>";
+	
+	
 	?>	
 	
   </div>
   </div>
+<?php 
+$cod=$_POST['content'];
+$enunt=$_POST['enunt'];
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  
-				</div>
-			</div>
-		  </div>
-		  
+?>		
+
+
+<form action="include\dragdrop.inc.php" method="POST" id="form">
+<div class="text">
+<div id="cod"><?php echo $cod; ?></div>
+<input value="<?php echo $enunt ?>" style="display:none" name="enunt">
+<input style="display:none" id="content" name="content">
+  <p>Variante corecte:</p>
+<button type="button" id="btn1" class="btn">+</button>
+<button type="button"  id="btn2" class="btn">-</button>
+<br>
+  <span id="span"></span>
+  <br>
+ <input id="imp" name="imp" type="text" style="display:none;">
+  
+  <p>Variante gresite:</p>
+  <button type="button" id="btn3" class="btn">+</button>
+<button type="button"  id="btn4" class="btn">-</button>
+<br>
+  <span id="span2"></span>
+  <br>
+ <input id="imp2" name="imp2" type="text" style="display:none;">
+ <input class="titlu submit" type="submit" name="submit">
+  </div>
+
+</form>
+  
+<script>
+  $(function() {
+  $('textarea#froala-editor').froalaEditor()
+});</script>
+
+
+
+<script>
+var i=0;
+$(document).ready(function(){
 	
+    $("#btn1").click(function(){
+	i++;
+	var str1 = "<input id='id";
+    var str2 = i;
+	var str3 = "' type='text' class='date' name='data"
+    var str4 = "' required>"
+    var text = str1.concat(str2,str3,str2,str4);
+        $("#span").append(text);
+	document.getElementById("imp").value = i;
+	
+	var markerTextChar = "\ufeff";
+    var markerTextCharEntity = "&#xfeff;";
 
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
-						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
-				  </form>
-					
-				 
-				</div>
-			</div>
-		  </div>
-		  <?php
+    var markerEl, markerId = "sel_" + new Date().getTime() + "_" + Math.random().toString().substr(2);
 
-if(isset($_SESSION['u_id']))
-{
-	$id_user=$_SESSION['u_id'];
-	$sql1="SELECT * FROM numar";
-	$result1=mysqli_query($conn,$sql1);
-	if(mysqli_num_rows($result1)==0)
-	{
-		$numar=mt_rand(1,100);
-		$sql2="INSERT INTO numar(numar,data) VALUES($numar,CURDATE())";
-		$result2=mysqli_query();
-	}
-	else {
-		$sql3="SELECT * FROM numar WHERE data=CURDATE()";
-		$result3=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result3)==0)
-		{
-			$numar=mt_rand(0,100);
-			$sql4="UPDATE numar SET numar=$numar,data=CURDATE()";
-			$result4=mysqli_query($conn,$sql4);
+    var selectionEl;
+
+   
+        var sel, range;
+
+       if (window.getSelection) {
+            sel = window.getSelection();
+
+            if (sel.getRangeAt) {
+                range = sel.getRangeAt(0).cloneRange();
+            } else {
+                // Older WebKit doesn't have getRangeAt
+                range = document.createRange();
+                range.setStart(sel.anchorNode, sel.anchorOffset);
+                range.setEnd(sel.focusNode, sel.focusOffset);
+
+                // Handle the case when the selection was selected backwards (from the end to the start in the
+                // document)
+                if (range.collapsed !== sel.isCollapsed) {
+                    range.setStart(sel.focusNode, sel.focusOffset);
+                    range.setEnd(sel.anchorNode, sel.anchorOffset);
+                }
+            }
+
+            range.collapse(false);
+
+            
+        }
+
+       
+		newNode = document.createElement("span");
+newNode.appendChild(document.createTextNode(""));
+range.insertNode(newNode);
+	
+	var id='id'+document.getElementById("imp").value;
+	var selObj = window.getSelection();
+	var selectedText=selObj.toString();
+	document.getElementById(id).value=selectedText;
+	
+    
+	document.getElementById("content").value=document.getElementById("cod").innerHTML;
+	
+    });
+});
+
+$(document).ready(function(){
+    $("#btn2").click(function(){
+		if(i>0)
+		{var str1 ="#id";
+		var str2 = i;
+		var text = str1.concat(str2);
+        $(text).remove();
+		i--;
+		document.getElementById("imp").value = i;
 		}
+		document.getElementById("content").value=document.getElementById("cod").innerHTML;
+	
+    });
+});
 
-	}
-	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
-			$result8=mysqli_query($conn,$sql8);
-			if(mysqli_num_rows($result8)==0)
-			{
-				echo "<div class='tot'>
-	
-	
-				<div>
-					<img src='ruleta.png' class='ruleta'>
-	
 
-		<form method='POST' action='numar3.php'>
-			<center>
-			<input type='number' min='1' max='100' autofocus class='numar' name='nr' required /></br>
-			
-			<input type='submit' value='submit' class='btn' name='submit' required />
-			</center>
-		</form>
- </div>
- </div>";
-	}
-	else 
-echo '<div class="deja">Deja ai facut provocarea azi! Incearca maine!</div>';}
-	?>
+    
+
+</script>
+
+
+<script>
+var j=0;
+$(document).ready(function(){
 	
- <body>
- </html>
+    $("#btn3").click(function(){
+	j++;
+	var str1 = "<input id='idx";
+    var str2 = j;
+	var str3 = "' type='text' class='date' name='dataf"
+    var str4 = "' required>"
+    var text = str1.concat(str2,str3,str2,str4);
+        $("#span2").append(text);
+	document.getElementById("imp2").value = j;
+    });
+});
+
+$(document).ready(function(){
+    $("#btn4").click(function(){
+		if(j>0)
+		{var str1 ="#idx";
+		var str2 = j;
+		var text = str1.concat(str2);
+        $(text).remove();
+		j--;
+		document.getElementById("imp2").value = j;}
+    });
+});
+</script>
+
+</body>
+</html>
