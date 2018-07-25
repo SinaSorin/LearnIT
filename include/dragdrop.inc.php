@@ -46,7 +46,7 @@ else
 			$sql3="INSERT INTO variante(id_test,varianta,corect) VALUES('$id','$data',0)";
 			$result3=mysqli_query($conn,$sql3);
 		}
-
+		header("Location: ../testedrag.php");
 		
 		
 	}
