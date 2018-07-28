@@ -11,11 +11,16 @@
  <link rel="shortcut icon" href="logo2.png" type="image/png">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" /><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" /></head>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
   <style>
 * {
-	
+	font-size:22px;
 	font-family:Helvetica;
   }
 body{
@@ -160,7 +165,7 @@ body{
 /****** REGISTER MODAL ******/
 .registermodal-container {
   padding: 30px;
-  max-width: 350px;
+  max-width: 550px;
   width: 100% !important;
   background-color: #F7F7F7;
   margin: 0 auto;
@@ -320,11 +325,30 @@ font-size:18px;
 	text-decoration:none;
 	color:black;
 }
+.cod1 {
+	border:2px solid #10BBB3;
+	border-radius:20px;
+	padding:30px;
+	
+}
+.ajutor {
+	border:2px solid #c81b1b;
+	float:right;
+	width:30px;
+	text-align:center;
+	position:relative;
+	bottom:10px;
+	color:#c81b1b;
+}
+.modal {
+	margin-top:30px;
+	
+}
 </style>
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
@@ -350,15 +374,36 @@ font-size:18px;
   </div>
   </div>
 <?php 
-$cod=$_POST['content'];
-$enunt=$_POST['enunt'];
+$cod=mysqli_real_escape_string($conn,$_POST['content']);
+$enunt=mysqli_real_escape_string($conn,$_POST['enunt']);
 
 ?>		
 
 
 <form action="include\dragdrop.inc.php" method="POST" id="form">
 <div class="text">
-<div id="cod"><?php echo $cod; ?></div>
+<a href="#"  data-toggle="modal" data-target="#register-modal" style="text-decoration:none;background:">
+	
+<div class="ajutor">
+?
+</div>
+</a>
+<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="registermodal-container">
+					
+					Selecteaza randul care vrei sa fie completat apoi apasa pe butonul "+" pentru variantele corecte. Pentru a creste dificultatea poti adauga si variante gresite. Daca apesi pe butoanele "-" poti elimina variante.
+				 
+				</div>
+			</div>
+		  </div>
+Codul introdus de tine:
+<div id="cod" class='cod1'>
+
+<?php echo $cod; ?>
+</div>
+
+
 <input value="<?php echo $enunt ?>" style="display:none" name="enunt">
 <input style="display:none" id="content" name="content">
   <p>Variante corecte:</p>
@@ -418,13 +463,12 @@ $(document).ready(function(){
             if (sel.getRangeAt) {
                 range = sel.getRangeAt(0).cloneRange();
             } else {
-                // Older WebKit doesn't have getRangeAt
+              
                 range = document.createRange();
                 range.setStart(sel.anchorNode, sel.anchorOffset);
                 range.setEnd(sel.focusNode, sel.focusOffset);
 
-                // Handle the case when the selection was selected backwards (from the end to the start in the
-                // document)
+                
                 if (range.collapsed !== sel.isCollapsed) {
                     range.setStart(sel.focusNode, sel.focusOffset);
                     range.setEnd(sel.anchorNode, sel.anchorOffset);
@@ -481,7 +525,7 @@ $(document).ready(function(){
 	j++;
 	var str1 = "<input id='idx";
     var str2 = j;
-	var str3 = "' type='text' class='date' name='dataf"
+	var str3 = "' type='text' autocomplete='off' class='date' name='dataf"
     var str4 = "' required>"
     var text = str1.concat(str2,str3,str2,str4);
         $("#span2").append(text);

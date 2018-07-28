@@ -304,12 +304,12 @@ font-size:18px;
 	}
 	if(!isset($_SESSION['u_id']))
 		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
+				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Inregistreaza-te</div></a>
 
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
+				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Conecteaza-te</div></a>';
 	else
 		echo '<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form> ';
 	echo "<div class='butoane'>";
 	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
@@ -340,11 +340,11 @@ font-size:18px;
  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
 				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
+					<h1>Conecteaza-te</h1><br>
 				  <form action="include/login.inc.php" autocomplete="off" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
+						<input type="text" name="uid" placeholder="Nume de utilizator"> 
+						<input type="password" name="pwd" placeholder="parola">
+						<input type="submit" name="submit" class="login loginmodal-submit" value="Conectare">
 				  </form>
 					
 				  
@@ -357,15 +357,15 @@ font-size:18px;
 <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     	  <div class="modal-dialog">
 				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
+					<h1>Creeaza un cont</h1><br>
 				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
+						<input type="text" name="user_first" placeholder="Nume"> 
+						<input type="text" name="user_last" placeholder="Prenume">
+						<input type="text" name="user" placeholder="Nume de utilizator">
 						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
+						<input type="password" name="pwd" placeholder="Parola">
+						<input type="password" name="pwd2" placeholder="Confirma parola">
+						<input type="submit" name="submit" class="login loginmodal-submit" value="Inregistrare">
 				  </form>
 					
 				 

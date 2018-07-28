@@ -4,6 +4,14 @@
 ?>
 <html>
 <head>
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
 <style>
 *{
 	font-size:22px;	
@@ -129,7 +137,7 @@
 /****** REGISTER MODAL ******/
 .registermodal-container {
   padding: 30px;
-  max-width: 350px;
+  max-width: 500px;
   width: 100% !important;
   background-color: #F7F7F7;
   margin: 0 auto;
@@ -285,7 +293,7 @@ font-size:18px;
 }
 .div2{
 	width: 80px;
-    min-height: 25px;
+    min-height: 58px;
     margin: 10px;
     padding: 10px;
     border: 1px solid black;
@@ -297,13 +305,25 @@ font-size:18px;
 	display:flex;
 	margin:20px;
 }
+.ajutor {
+	border:2px solid #c81b1b;
+	float:right;
+	width:30px;
+	text-align:center;
+	
+	color:#c81b1b;
+}
+.modal {
+	margin-top:30px;
+	
+}
 </style>
 </head>
 <body>
 
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
@@ -328,6 +348,22 @@ font-size:18px;
   </div>
   </div>
 <div class="tot">
+<a href="#"  data-toggle="modal" data-target="#register-modal" style="text-decoration:none;background:">
+	
+<div class="ajutor">
+?
+</div>
+</a>
+	<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    	  <div class="modal-dialog">
+				<div class="registermodal-container">
+					
+					Trage raspunsurile pe care le consideri corecte in spatiile libere. Fiecarui spatiu ii corespunde o singura varianta din cele afisate
+				 
+				 
+				</div>
+			</div>
+		  </div>
 
 <?php
 	$id=$_GET['subject'];
@@ -356,11 +392,21 @@ font-size:18px;
 			if($row['corect']==1)
 			{
 				$varianta=$varianta."<span></span>";
-				$cod=str_replace("$varianta","<div id='d$nr' class='div2' ondrop='drop(event)' ondragover='allowDrop(event)'></div><input id='id$nr' style='display:none' name='id$nr' form='form' required>","$cod");
+				$cod=str_replace("$varianta","<div id='d$nr' class='div2' ondrop='drop(event)' ondragover='allowDrop(event)'></div><input id='id$nr' style='display:none;' name='id$nr' form='form' required>","$cod");
 				
 			}
 		}	
 	}
+	
+	for($y=1;$y<=$nr;$y++)
+ {
+  $i=mt_rand(1,$nr);
+  $j=mt_rand(1,$nr);
+  $aux=$variante[$i];
+  $variante[$i]=$variante[$j];
+  $variante[$j]=$aux;
+ }
+	
 	echo "<br><br><div class='cod'>";
 	echo $cod;
 	echo '</div>';

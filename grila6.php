@@ -13,11 +13,11 @@ if(isset($_POST['submitq']))
 		while($row=mysqli_fetch_assoc($result1))
 		{
 			$i++;
-			$raspuns_corect=$_POST["corect$i"];
+			$raspuns_corect=mysqli_real_escape_string($conn,$_POST["corect$i"]);
 			$id_intrebare=$row['id'];
 			for($j=1;$j<=$var;$j++)
 				{	
-					$varianta=$_POST["var$i$j"];
+					$varianta=mysqli_real_escape_string($conn,$_POST["var$i$j"]);
 					if($raspuns_corect==$j)
 						$raspuns=1;
 					else

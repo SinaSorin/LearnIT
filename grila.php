@@ -283,7 +283,7 @@ font-size:18px;
 	
 	<div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
      <div class="profil">
   
@@ -314,7 +314,7 @@ font-size:18px;
 <?php 
 $id_lectie=$_GET['subject'];
 echo "<form action='grila2.php?subject=$id_lectie' method='POST'>
-			<input type='text' name='titlu'><br>
+			<input type='text' autocomplete='off' name='titlu'><br>
 
 			<input type='submit' value='submit' name='submit'/>
 			</form>";

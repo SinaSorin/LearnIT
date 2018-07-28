@@ -297,7 +297,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   

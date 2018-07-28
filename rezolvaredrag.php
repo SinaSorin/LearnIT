@@ -139,15 +139,13 @@ font-size:18px;
 <div class="tot">
 <div class='cod'>
 <?php
-
-$id_user=$_SESSION['u_id'];
 $id=$_GET['subject'];
 $sql1="SELECT * FROM dragdrop WHERE id=$id";
 $result1=mysqli_query($conn,$sql1);
 if(mysqli_num_rows($result1)>0)
 {
-	while($row=mysqli_fetch_assoc($result1))
-		$cod=$row['cod'];
+ while($row=mysqli_fetch_assoc($result1))
+  $cod=$row['cod'];
 }
 $sql2="SELECT * FROM variante WHERE id_test=$id";
 $result2=mysqli_query($conn,$sql2);
@@ -169,49 +167,13 @@ ksort($variante);
 $a=0;
 $corect=array_values($variante);
  
- 
 
-$total=100;
-$gresit=ceil(100/$i);
-for($a=1;$a<=$i;$a++)
-{	$raspuns=$_POST["id$a"];
-	$b=$a-1;
-	if(strcmp($raspuns,$corect[$b])!=0)
-	{$total=$total-$gresit;
-	  $cod=str_replace("$corect[$b]","<span class='gresit'>$raspuns</span>","$cod");
-	}
-	else
-		$cod=str_replace("$corect[$b]","<span class='corect'>$raspuns</span>","$cod");
-}
+for($a=0;$a<=$i-1;$a++)	
+	$cod=str_replace("$corect[$a]","<span class='corect'>$corect[$a]</span>","$cod");
 echo $cod;
-if($total<0)
-	$total=0;
-echo '</div><br>Xp obtinut: ';
-echo $total;
 
-$sql3="SELECT * FROM rank WHERE id_user=$id_user";
-		$result4=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result4)>0)
-		{
-			while($row=mysqli_fetch_assoc($result4))
-			{
-				$exp=$row['xp'];
-				$exp=$exp+$total;
-				$rank=$row['nivel'];
-				if($exp>=$rank*100)
-				{
-					$exp=$exp-$rank*100;
-					$rank=$rank+1;
-				}
-				$sql4="UPDATE rank
-					SET nivel = '$rank' , xp= '$exp'
-					WHERE id_user ='$id_user';";
-				$result=mysqli_query($conn,$sql4);
-									
-									
-			}
-								
-		}
+
+
 ?>
 
 </div>

@@ -324,7 +324,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
@@ -354,7 +354,7 @@ font-size:18px;
 
 <form action="creareex2.php" method="POST" id="form">
 <div class="text">
-<input class="titlu" type="text" name="enunt" size="80" placeholder="Enunt" required >
+<input class="titlu" type="text" autocomplete='off' name="enunt" size="80" placeholder="Enunt" required >
 
 
   <textarea id="froala-editor" name="content"></textarea>

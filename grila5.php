@@ -285,7 +285,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	  <div class="profil">
   
@@ -313,7 +313,7 @@ font-size:18px;
 $id_test=$_GET['id'];
 if(isset($_POST['submitvar']))
 {
-	$var=$_POST['var'];
+	$var=mysqli_real_escape_string($conn,$_POST['var']);
 	$sql="SELECT * FROM intrebari WHERE id_test=$id_test";
 	$result=mysqli_query($conn,$sql);
 	if(mysqli_num_rows($result)>0)
@@ -328,7 +328,7 @@ if(isset($_POST['submitvar']))
 			for($j=1;$j<=$var;$j++)
 					echo "
 							<input type='radio' value='$j' name='corect$i'>
-							<input type='text' name='var$i$j'><br>";
+							<input type='text' autocomplete='off' name='var$i$j'><br>";
 				echo '<br>';
 		}
 		echo '<input type="submit" value="submit" name="submitq"/>

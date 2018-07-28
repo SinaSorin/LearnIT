@@ -457,12 +457,12 @@ font-size:18px;
 	<?php 
 	if(!isset($_SESSION['u_id']))
 		echo '
-				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Register</div></a>
+				<a href="#" data-toggle="modal" data-target="#register-modal"><div class="lr divs link">Inregistreaza-te</div></a>
 
-				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Login</div></a>';
+				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Conecteaza-te</div></a>';
 	else
 		echo '<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form> ';
   ?>
    <div class="profil">

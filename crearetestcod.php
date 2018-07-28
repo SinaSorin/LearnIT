@@ -323,7 +323,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
@@ -353,8 +353,8 @@ font-size:18px;
 
 <form action="include\test_cod.inc.php" method="POST" id="form">
 <div class="text">
-<input class="titlu" type="text" name="enunt" size="80" placeholder="Enunt" required >
-<input class="titlu" type="text" name="explicatie" size="80" placeholder="Explicatie" required >
+<input class="titlu" type="text" autocomplete='off' name="enunt" size="80" placeholder="Enunt" required >
+<input class="titlu" type="text" autocomplete='off' name="explicatie" size="80" placeholder="Explicatie" required >
 <div class="capitol" style="font-size:25px;">
 	</div>
   <textarea id="froala-editor" name="content"></textarea>
@@ -382,7 +382,7 @@ $(document).ready(function(){
 	i++;
 	var str1 = "<input id='id";
     var str2 = i;
-	var str3 = "' type='text' class='date' name='data"
+	var str3 = "' type='text' class='date' autocomplete='off' name='data"
     var str4 = "' required>"
     var text = str1.concat(str2,str3,str2,str4);
         $("#span").append(text);

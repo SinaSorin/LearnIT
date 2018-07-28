@@ -282,7 +282,7 @@ font-size:18px;
 	<body>
 	<div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 					   <div class="profil">
   
@@ -315,7 +315,7 @@ if(isset($_POST['submitnr']))
 	echo "<form action='grila4.php?nr=$nr & titlu=$titlu ' method='POST'>";
 	for($i=1;$i<=$nr;$i++)
 				echo "
-				<input type='text' name='intrebare$i'><br>";
+				<input type='text' autocomplete='off' name='intrebare$i'><br>";
 		echo '<input type="submit" value="submit" name="submitq"/>
 				  </form>';
 }

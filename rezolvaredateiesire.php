@@ -290,7 +290,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
@@ -403,7 +403,7 @@ else
 		echo "Introdu datele de iesire:<br>";
 		echo "<form method='POST'>";
 		for($i=1;$i<=$nr;$i++)
-			echo "<input type='text' name='data$i' required>";
+			echo "<input type='text' autocomplete='off' name='data$i' required>";
 		echo "<br><input type='submit' name='submit' value='submit'></form>";
 	}
 	

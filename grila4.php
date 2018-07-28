@@ -7,7 +7,7 @@ include_once 'include/dbh.inc.php';
 $nr=$_GET['nr'];
 for($i=1;$i<=$nr;$i++)
 {		
-	$intrebare=$_POST["intrebare$i"];
+	$intrebare=mysqli_real_escape_string($conn,$_POST["intrebare$i"]);
 	$titlu=$_GET["titlu"];
 	$sql1="SELECT * FROM test WHERE titlu='$titlu'";
 	$result1=mysqli_query($conn,$sql1);
@@ -304,7 +304,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Log out"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
 	   <div class="profil">
   
