@@ -23,7 +23,7 @@ if(isset($_POST["submitq"])) {
 
 	for($i=1;$i<=$nr;$i++)
 	{
-		$intrebare=$_POST["intrebare$i"];
+		$intrebare=mysqli_real_escape_string($conn,$_POST["intrebare$i"]);
 		$sql3="SELECT * FROM test WHERE titlu=$titlu AND id_lectie=$id";
 		$result3=mysqli_query($conn,$sql3);
 		if(mysqli_num_rows($result3)>0)
@@ -33,10 +33,10 @@ if(isset($_POST["submitq"])) {
 				$id_test=$row3['id'];
 				$sql="INSERT INTO intrebari(continut,id_test) VALUES('$intrebare',$id_test)";
 				mysqli_query($conn,$sql);
-				$raspuns_corect=$_POST["corect$i"];
+				$raspuns_corect=mysqli_real_escape_string($conn,$_POST["corect$i"]);
 				for($j=1;$j<=$var;$j++)
 				{	
-					$varianta=$_POST["var$i$j"];
+					$varianta=mysqli_real_escape_string($conn,$_POST["var$i$j"]);
 					if($raspuns_corect==$j)
 						$raspuns=1;
 					else

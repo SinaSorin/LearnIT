@@ -3,9 +3,9 @@ if(isset($_POST['submit'])) {
 	
 	include_once 'dbh.inc.php';
 	
-	$first=$_POST['first']; // preiau informatiile de la pagina "signup.php"
-	$last=$_POST['last'];
-	$email=$_POST['email'];
+	$first=mysqli_real_escape_string($conn,$_POST['first']); // preiau informatiile de la pagina "signup.php"
+	$last=mysqli_real_escape_string($conn,$_POST['last']);
+	$email=mysqli_real_escape_string($conn,$_POST['email']);
 	$uid=mysqli_real_escape_string($conn,$_POST['uid']);
 	$pwd=mysqli_real_escape_string($conn,$_POST['pwd']);
 	$pwd2=mysqli_real_escape_string($conn,$_POST['pwd2']);

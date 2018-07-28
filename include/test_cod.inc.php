@@ -9,9 +9,10 @@ if(isset($_POST['submit']))
 		header("Location: ../crearetestcod.php?introdudatedeiesire!");
 	else
 	{
-		$enunt=$_POST['enunt'];
-		$cod=$_POST['content'];
-		$sql1="INSERT INTO test_cod(id_user,enunt,cod) VALUES('$id_user','$enunt','$cod')";
+		$enunt=mysqli_real_escape_string($conn,$_POST['enunt']);
+		$cod=mysqli_real_escape_string($conn,$_POST['content']);
+		$explicatie=mysqli_real_escape_string($conn,$_POST['explicatie']);
+		$sql1="INSERT INTO test_cod(id_user,enunt,cod,explicatie) VALUES('$id_user','$enunt','$cod','$explicatie')";
 		$result1=mysqli_query($conn,$sql1);
 		$sql2="SELECT * FROM test_cod WHERE enunt='$enunt'";
 		$result2=mysqli_query($conn,$sql2);
@@ -24,7 +25,7 @@ if(isset($_POST['submit']))
 		}
 		for($i=1;$i<=$imp;$i++)
 		{
-			$data=$_POST["data$i"];
+			$data=mysqli_real_escape_string($conn,$_POST["data$i"]);
 			$sql3="INSERT INTO date_iesire(id_test,data) VALUES('$id','$data')";
 			$result3=mysqli_query($conn,$sql3);
 		}

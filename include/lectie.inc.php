@@ -2,9 +2,9 @@
 session_start();
 include_once 'dbh.inc.php';
 if(isset($_POST['submit'])){
-	$titlu=$_POST['titlu'];
-	$content=$_POST['content'];
-	$capitol=$_POST['capitol'];
+	$titlu=mysqli_real_escape_string($conn,$_POST['titlu']);
+	$content=mysqli_real_escape_string($conn,$_POST['content']);
+	$capitol=mysqli_real_escape_string($conn,$_POST['capitol']);
 	if(empty($titlu) || empty($content) || empty($capitol)){
 		header("Location: ../b.html?empty");
 	}
