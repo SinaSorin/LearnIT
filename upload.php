@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
 	
 	if(in_array($fileActuaExt, $allowed)) {
 		if($fileError == 0) {
-			if($fileSize <  1000000 )  {
+			if($fileSize <  10000000 )  {
 				$fileNameNew="profile".$id.".".$fileActuaExt;
 				$fileDestination = 'uploads/'.$fileNameNew;
 				move_uploaded_file($fileTmpName,$fileDestination);

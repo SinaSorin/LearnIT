@@ -461,9 +461,9 @@ class="profil">
 					
 				}
 					
-			echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie;
+			echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie." din $num teste";
 			echo "<form method='POST' action='include\demote.inc.php?subject=$id'>
-					  <input type='submit' class='demote' value='Demote' name='submit$id'>
+					  <input type='submit' class='demote' value='Retrogradare' name='submit$id'>
 					  </form>";
 			echo "</div></li>";
 		}
@@ -520,9 +520,9 @@ $sql2="SELECT * FROM user WHERE user_status=3";
 					
 				}
 				
-				echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie;
+				echo "<li><img class='poza1' src='$src'><div class='nume'>".$user." ".$medie." din $num teste";
 				echo "<form method='POST' action='include\upgrade.inc.php?subject=$id'>
-					  <input type='submit' class='upgrade' value='Upgrade' name='submit$id'>
+					  <input type='submit' class='upgrade' value='Promovare' name='submit$id'>
 					  </form>";
 				echo "</div></li>";
 			}

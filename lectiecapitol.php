@@ -362,7 +362,8 @@ a:hover {
 }
 .profil {
 	display:flex;
-	
+	position:relative;
+	bottom:14px;
 }
 .poza {
 	width:50px;
@@ -380,6 +381,7 @@ a:hover {
 	position:absolute;
 	left: 16%;
     top: 14px;
+	z-index:1;
 }
 .butonn {
 	color:white;

@@ -292,7 +292,7 @@ font-size:18px;
 	color:black;
 }
 .div2{
-	width: 80px;
+	width: 91px;
     min-height: 58px;
     margin: 10px;
     padding: 10px;

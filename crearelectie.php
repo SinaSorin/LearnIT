@@ -312,7 +312,7 @@ font-size:18px;
 
 <form action="include/lectie.inc.php" method="POST">
 <div class="text">
-<input class="titlu" type="text" name="titlu" placeholder="titlu">
+<input class="titlu" type="text" name="titlu" autocomplete="off" placeholder="titlu">
 <div class="capitol" style="font-size:25px;"> Capitol:
 <select class="titlu2" name="capitol">
 	<?php
