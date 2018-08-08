@@ -6,7 +6,7 @@ if(isset($_POST['submit'])){
 	$content=mysqli_real_escape_string($conn,$_POST['content']);
 	$capitol=mysqli_real_escape_string($conn,$_POST['capitol']);
 	if(empty($titlu) || empty($content) || empty($capitol)){
-		header("Location: ../b.html?empty");
+		header("Location: ../crearelectie.php?gol");
 	}
 	else{
 		$id_user=$_SESSION['u_id'];
