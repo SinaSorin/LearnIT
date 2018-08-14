@@ -323,7 +323,7 @@ font-size:18px;
 
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form>
 	   <div class="profil">
   
@@ -340,7 +340,7 @@ font-size:18px;
 	}
 		echo "<div class='butoane'>";
 	echo "<a href='salucrez.php' class='butonn'>Rank</a>";
-	echo "<a href='testedrag.php' class='butonn'>Exercitii</a>";
+	echo "<a href='testedrag.php' class='butonn'>Exerciții</a>";
 	echo "</div>";
 	
 	?>	
@@ -358,7 +358,7 @@ font-size:18px;
     	  <div class="modal-dialog">
 				<div class="registermodal-container">
 					
-					Trage raspunsurile pe care le consideri corecte in spatiile libere. Fiecarui spatiu ii corespunde o singura varianta din cele afisate
+					Trage răspunsurile pe care le consideri corecte în spațiile libere. Fiecărui spațiu îi corespunde o singură variantă din cele afișate.
 				 
 				 
 				</div>

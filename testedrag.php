@@ -297,7 +297,7 @@ font-size:18px;
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form>
 	   <div class="profil">
   
@@ -331,7 +331,7 @@ if(mysqli_num_rows($result2)>0)
 	{
 		$status=$row2['user_status'];
 		if($status==1 or $status==2)
-			echo "<a href='creareex.php' class='creaza'><button>Creeaza o problema</button></a>";
+			echo "<a href='creareex.php' class='creaza'><button>Creează o problemă</button></a>";
 	}
 }
 
@@ -346,15 +346,15 @@ if(mysqli_num_rows($result)>0)
 		$i++;
 		$id=$row['id'];
 		if($id_user==$row['id_user'])
-			echo "<p title='Nu poti rezolva propriile teste!'>Exercitiu$i <span class='glyphicon glyphicon-remove'></span> </p>";
+			echo "<p title='Nu poți rezolva propriile teste!'>Exercițiu$i <span class='glyphicon glyphicon-remove'></span> </p>";
 		else
 		{
 			$sql1="SELECT * FROM user_drag WHERE id_user='$id_user' AND id_test='$id'";
 			$result1=mysqli_query($conn,$sql1);
 			if(mysqli_num_rows($result1)>0)
-				echo "<p><a href='rezolvaredrag.php?subject=$id'>Exercitiu$i</a><span class='glyphicon glyphicon-ok'></span></p> ";
+				echo "<p><a href='rezolvaredrag.php?subject=$id'>Exercițiu$i</a><span class='glyphicon glyphicon-ok'></span></p> ";
 			else	
-				echo "<p><a href='dragdrop.php?subject=$id'>Exercitiu$i</a></p>";
+				echo "<p><a href='dragdrop.php?subject=$id'>Exercițiu$i</a></p>";
 		}
 		
 	}

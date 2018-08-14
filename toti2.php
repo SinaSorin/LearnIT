@@ -1,55 +1,18 @@
-<?php
-	session_start();
-	include_once 'include/dbh.inc.php';
-	
-	if(isset($_SESSION['u_id']))
-	{
-	$user_status=$_SESSION['u_status'];
-	if($user_status==3)
-			header("Location: index.php");
-	}
-	else
-		header("Location: index.php");
+<?php 
+session_start();
+include_once 'include/dbh.inc.php';
+$id_user=$_SESSION['u_id'];
 ?>
+
 <html>
 <head>
-<title>Creare lectie</title>
- <link rel="shortcut icon" href="logo2.png" type="image/png">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" /><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" /></head>
 <style>
-* {
-	
-	font-family:Helvetica;
-  }
-body{
+body {
 	background-color:#e5ebe7;
 	margin:0px;
 	padding:0px;
-}
-.text {
-	width:80%;
-	margin-left:auto;
-	margin-right:auto;
-	margin-top:40px;
-}
-.titlu {
-	margin-bottom:20px;
-	font-size:25px;
-}
-.titlu2 {
-	margin-bottom:20px;
-	font-size:25px;
-}
-.capitol {
-	margin-left:40px;
-	display:inline;
-}
-.submit {
-	margin-top:20px;
-}
-  
+	font-size:22px;
+  }
   .divs {
 	background-color:#10BBB3;
 	border:0px;
@@ -267,7 +230,7 @@ font-size:18px;
 	position:relative;
 	background-color:#10BBB3;
 	width:100%;
-	height:50px;
+	height:6.5%;
 	z-index:2;
 }
 .row {
@@ -275,80 +238,219 @@ font-size:18px;
 	width:100%;
 	height:500px;
 }
-.profil {
-	display:flex;
+.profil{
+	position:relative;
+	
+	background-color:#10BBB3;
+	width:20%;
+	height:80%;
 	
 }
-.poza {
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	
+.s1 {
+	width:100%;
+	height:95%;
 }
-.cont {
-	display:flex;
+.s2 {
+	width:25%;
+	float:left;
+	background-color:#009999;
+	height:100%;
+}
+.s3 {
+	width:75%;
+	float:left;
+	height:100%;
+}
+.upgrade {
+	font-size:17px;
+	background-color:#10BBB3;
+	border:1px solid black;
 	color:white;
-	font-size:18px;
-	margin-top:10px;
+	
+}
+.demote {
+	font-size:17px;
+	background-color:#bb1010;
+	border:1px solid black;
+	color:white;
+	
+}
+form {
+display:inline;
+}
+.inputfile {
+ width: 0.1px;
+ height: 0.1px;
+ opacity: 0;
+ overflow: hidden;
+ position: absolute;
+ z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+ padding:5px;
+    color: black;
+    background-color:white;
+    display: inline-block;
+ cursor: pointer;
+}
+.inputfile + label:hover {
+    color: white;
+    background-color: black;
+}
+
+.profileimg{
+ padding: 4px;
+ width: 100px;
+ height: 50px;
+ margin: 20px;
+ border:none;
+ font-weight: 700;
+ background-color: #f3f3f3;
+ font-family":"arial";
+ font-size: 14px;
+ color: #111;
+ cursor: pointer;
+}
+.profileimg:hover {
+ background-color: #ccc;
+}
+.profil {
+	width:250px;
+	height:250px;
+	border-radius:50%;
+	position:relative;
+	top:120px;
+	left:60px;
+}
+.form {
+	position:relative;
+	top:150px;
+	left:20px;
 }
 </style>
+</head>
 <body>
+
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
 					</form>
-	   <div class="profil">
-  
-	<a href="index.php"><img src="logo.png" class="poza"></a>
-	<?php 
-	
-		$user=$_SESSION['u_uid'];
-		
-	if($user_status==1)
-		echo "<a href='toti.php'><div class='cont'>$user</div></a>";
-	else
-		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
-	
-	
-	
-	?>	
-	
-  </div>
-  </div>
-					
   </div>
 
-<form action="include/lectie.inc.php" method="POST">
-<div class="text">
-<input class="titlu" type="text" name="titlu" autocomplete="off" placeholder="titlu">
-<div class="capitol" style="font-size:25px;"> Capitol:
-<select class="titlu2" name="capitol">
-	<?php
-	
-	$sql="SELECT * FROM capitole";
-	$result=mysqli_query($conn,$sql);
-	if(mysqli_num_rows($result)>0){
-		while($row=mysqli_fetch_assoc($result)){
-			$capitol=$row['titlu'];
-			echo "<option value='$capitol'>$capitol</option>";
+<section class="s1" >
+<section class="s2">
+<?php
+$sql="SELECT * FROM profileimg WHERE userid=$id_user";
+$result=mysqli_query($conn,$sql);
+if(mysqli_num_rows($result)>0)
+{
+	while($row=mysqli_fetch_assoc($result))
+	{
+		$src=$row['src'];
+	}
+}
+?>
+<img src=<?php 
+		echo $src ;
+?> 
+class="profil">
+ <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
+    <input type="file" name="file" id="file" class="inputfile" />
+     <label for="file">Schimba-ti poza de profil</label>
+    <button type='submit' name='submit' class="profileimg">UPLOAD</button> <!--personalizarea profilului -->
+    </form>
+</section>
+<section class="s3">
+<form method="POST">
+<input type="submit" name="Ajutoare" value="Ajutoare">
+</form>
+<form method="POST">
+<input type="submit" name="Incepatori" value="Incepatori">
+</form>
+<form method="POST">
+<input type="submit" name="Toti" value="Toti">
+</form>
+<?php
+if(isset($_POST['Ajutoare']))
+{
+	$sql1="SELECT * FROM user WHERE user_status=2";
+	$result1=mysqli_query($conn,$sql1);
+	if(mysqli_num_rows($result1)>0)
+	{
+		echo "<ol>";
+		while($row=mysqli_fetch_assoc($result1))
+		{
+			$id=$row['user_id'];
+			$user=$row['user_uid'];
+			echo "<li>".$user;
+			echo "<form method='POST' action='include\demote.inc.php?subject=$id'>
+					  <input type='submit' class='demote' value='Demote' name='submit$id'>
+					  </form>";
+			echo "</li>";
 		}
+	}
+}
+else
+	if(isset($_POST['Incepatori']))
+	{
+		$sql2="SELECT * FROM user WHERE user_status=3";
+		$result2=mysqli_query($conn,$sql2);
+		if(mysqli_num_rows($result2)>0)
+		{
+			echo "<ol>";
 			
+			while($row=mysqli_fetch_assoc($result2))
+			{
+				$id=$row['user_id'];
+				$user=$row['user_uid'];
+				echo "<li>".$user;
+				echo "<form method='POST' action='include\upgrade.inc.php?subject=$id'>
+					  <input type='submit' class='upgrade' value='Upgrade' name='submit$id'>
+					  </form>";
+				echo "</li>";
+			}
+		}
+	}
+	else
+	{
+		$sql="SELECT * FROM user";
+		$result=mysqli_query($conn,$sql);
+		if(mysqli_num_rows($result)>0)
+		{
+			echo "<ol>";
+			while($row=mysqli_fetch_assoc($result))
+			{
+				$id=$row['user_id'];
+				$user=$row['user_uid'];
+				$status=$row['user_status'];
+				if($status!=1)
+				{
+					echo "<li>".$user;
+					if($status==3)
+					echo "<form method='POST' action='include\upgrade.inc.php?subject=$id'>
+					  <input type='submit' class='upgrade' value='Upgrade' name='submit$id'>
+					  </form>";
+					  else
+						  echo "<form method='POST' action='include\demote.inc.php?subject=$id'>
+					  <input type='submit' class='demote' value='Demote' name='submit$id'>
+					  </form>";
+						  
+				echo "</li>";
+				}
+				
+			}
+			echo "</ol>";
+				
+		}
 	}
 
-	?>
-  </select>
-	</div>
-  <textarea id="froala-editor" name="content"></textarea>
-	
-  
-  
-  <input class="titlu submit" type="submit" name="submit">
-  </div>
-</form>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
-<script>
-  $(function() {
-  $('textarea#froala-editor').froalaEditor()
-});</script>
+
+
+
+?>
+</section>
+</section>
 </body>
 </html>

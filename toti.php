@@ -379,7 +379,7 @@ display:inline;
 
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 				</form>
 	<div class="profil2">
   
@@ -419,8 +419,8 @@ if(mysqli_num_rows($result)>0)
 class="profil">
  <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
     <input type="file" name="file" id="file" class="inputfile" />
-     <label for="file">Schimba-ti poza de profil</label>
-    <button type='submit' name='submit' class="profileimg">UPLOAD</button> <!--personalizarea profilului -->
+     <label for="file">Schimbă-ți poza de profil</label>
+    <button type='submit' name='submit' class="profileimg">Încarcă</button> <!--personalizarea profilului -->
     </form>
 </section>
 <section class="s3">
@@ -482,7 +482,7 @@ class="profil">
 ?>
 </section>
 <section class="s4">
-<p class="incepator"><strong>Incepatori</strong></p>
+<p class="incepator"><strong>Începatori</strong></p>
 <?php
 $sql2="SELECT * FROM user WHERE user_status=3";
 		$result2=mysqli_query($conn,$sql2);

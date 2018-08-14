@@ -11,7 +11,8 @@ include_once 'include/dbh.inc.php';?>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
- 
+  <link rel="stylesheet" href="styles/bara.css">
+  
 
 <style>
 *{
@@ -23,27 +24,7 @@ include_once 'include/dbh.inc.php';?>
 		margin:0px;
 		padding:0px;
 	}
-	.divs {
-	background-color:#10BBB3;
-	border:0px;
-	color:white;
-	opacity:0.8;
-	margin-bottom:32px;
-	padding:12px;
-  }
-	
-	a {
-		text-decoration:none;
-		color:black;
-	}
-	.divs:hover {
-		background-color:#208b86;
-	}
-  
-  	@import url(http://fonts.googleapis.com/css?family=Roboto);
-
-
-
+@import url(http://fonts.googleapis.com/css?family=Roboto);
 /****** REGISTER MODAL ******/
 .registermodal-container {
   padding: 30px;
@@ -136,44 +117,6 @@ include_once 'include/dbh.inc.php';?>
   transition: opacity ease 0.5s;
 } 
 
-
-
-.lr {
-	position:relative;
-	float: right;
-	width:auto;
-}
-.link {
-font-size:18px;
-}
-.bara {
-	position:relative;
-	background-color:#10BBB3;
-	width:100%;
-	height:50px;
-	z-index:2;
-}
-.row {
-	
-	width:100%;
-	height:500px;
-}
-.profil {
-	display:flex;
-	
-}
-.poza {
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	
-}
-.cont {
-	display:flex;
-	color:white;
-	font-size:18px;
-	margin-top:10px;
-}
 .tot {
 	color:black;
 	width:75%;
@@ -312,7 +255,7 @@ progress {
 <body>
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form>
 	   <div class="profil">
   
@@ -376,7 +319,7 @@ progress {
 	<img src='$src' class='robot'>
 	<a href='robot.php'>
 	<div class='overlay'>
-    <div class='text'>Robotii mei</div>
+    <div class='text'>Roboții mei</div>
   </div></a>
   "
 	?>
@@ -408,12 +351,12 @@ progress {
 					
 					<div class="stanga">
 					
-					<a href="testecod.php" style="color:black;">Probleme date iesire</a>
+					<a href="testecod.php" style="color:black;">Probleme date ieșire</a>
 					
 					</div>
 					<div class="dreapta">
 					
-					<a href="testedrag.php" style="color:black;">Exercitii drag&drop </a>
+					<a href="testedrag.php" style="color:black;">Exerciții drag&drop </a>
 					
 				 </div>
 				 

@@ -4,6 +4,7 @@ include_once 'include/dbh.inc.php';
 ?>
 <html>
 <head>
+<link rel="stylesheet" href="styles/bara.css">
 <style>
 *{
 	font-size:22px;	
@@ -14,60 +15,7 @@ include_once 'include/dbh.inc.php';
 		margin:0px;
 		padding:0px;
 	}
-	.divs {
-	background-color:#10BBB3;
-	border:0px;
-	color:white;
-	opacity:0.8;
-	margin-bottom:32px;
-	padding:12px;
-  }
 	
-	a {
-		text-decoration:none;
-		color:black;
-	}
-	.divs:hover {
-		background-color:#208b86;
-	}
-  
-
-.lr {
-	position:relative;
-	float: right;
-	width:auto;
-}
-.link {
-font-size:18px;
-}
-.bara {
-	position:relative;
-	background-color:#10BBB3;
-	width:100%;
-	height:50px;
-	z-index:2;
-}
-.row {
-	
-	width:100%;
-	height:500px;
-}
-.profil {
-	display:flex;
-	
-}
-.poza {
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	
-}
-.cont {
-	display:flex;
-	color:white;
-	font-size:18px;
-	margin-top:10px;
-}
 .tot {
 	color:black;
 	width:70%;
@@ -85,20 +33,7 @@ font-size:18px;
 	padding:30px;
 	
 }
-.butoane {
-	position:absolute;
-	left:15%;
-	top:14px;
-}
-.butonn {
-	color:white;
-	margin-left:10px;
-	font-size:14;
-}
-.butonn:hover {
-	text-decoration:none;
-	color:black;
-}
+
 .gresit {
 	color:red;
 	font-weight:bold;

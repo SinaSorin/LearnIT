@@ -4,6 +4,7 @@ include_once 'include/dbh.inc.php';
 ?>
 <html>
 <head>
+ <link rel="stylesheet" href="styles/bara.css">
 <style>
  * {
 	
@@ -15,233 +16,12 @@ include_once 'include/dbh.inc.php';
 	padding:0px;
   }
   
-  .divs {
-	background-color:#10BBB3;
-	border:0px;
-	color:white;
-	opacity:0.8;
-	margin-bottom:32px;
-	padding:12px;
-  }
+ 
 	.titlu {
 		font-size:52px;
 		width:40%;
 	}
-	a {
-		text-decoration:none;
-		color:black;
-	}
-	.divs:hover {
-		background-color:#208b86;
-	}
-
-/****** LOGIN MODAL ******/
-.loginmodal-container {
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  font-family: roboto;
-}
-
-.loginmodal-container h1 {
-  text-align: center;
-  font-size: 1.8em;
-  font-family: roboto;
-}
-
-.loginmodal-container input[type=submit] {
-  width: 100%;
-  display: block;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.loginmodal-container input[type=text], input[type=password] {
-  height: 44px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.loginmodal-container input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.loginmodal {
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 700;
-  height: 36px;
-  padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
-}
-
-.loginmodal-submit {
-  /* border: 1px solid #3079ed; */
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #10BBB3;
-  padding: 17px 0px;
-  font-family: roboto;
-  font-size: 14px;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-
-.loginmodal-submit:hover {
-  /* border: 1px solid #208b86; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #208b86;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
-
-.loginmodal-container a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 400;
-  text-align: center;
-  display: inline-block;
-  opacity: 0.6;
-  transition: opacity ease 0.5s;
-} 
-
-
-
-/****** REGISTER MODAL ******/
-.registermodal-container {
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  font-family: roboto;
-}
-
-.registermodal-container h1 {
-  text-align: center;
-  font-size: 1.8em;
-  font-family: roboto;
-}
-
-.registermodal-container input[type=submit] {
-  width: 100%;
-  display: block;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.registermodal-container input[type=text], input[type=password] {
-  height: 44px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.registermodal-container input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.registermodal {
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 700;
-  height: 36px;
-  padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
-}
-
-.registermodal-submit {
-  /* border: 1px solid #3079ed; */
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #4d90fe;
-  padding: 17px 0px;
-  font-family: roboto;
-  font-size: 14px;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-
-.registermodal-submit:hover {
-  /* border: 1px solid #2f5bb7; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #357ae8;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
-
-.registermodal-container a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 400;
-  text-align: center;
-  display: inline-block;
-  opacity: 0.6;
-  transition: opacity ease 0.5s;
-} 
-
-
-
-.lr {
-	position:relative;
-	float: right;
-	width:auto;
-}
-.link {
-font-size:18px;
-}
-.bara {
-	position:relative;
-	background-color:#10BBB3;
-	width:100%;
-	height:50px;
-	z-index:2;
-	top:-2px;
-}
-.row {
 	
-	width:100%;
-	height:500px;
-}
 .tot {
 	color:black;
 	width:70%;
@@ -251,22 +31,7 @@ font-size:18px;
 	padding-top:15px;
 	margin-top:10px;
 }
-.profil {
-	display:flex;
-	margin-top:-14px;
-}
-.poza {
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	
-}
-.cont {
-	display:flex;
-	color:white;
-	font-size:18px;
-	margin-top:10px;
-}
+
 .ruleta{
 	animation: rotatie 2s ease-in-out forwards;
 	width:100%;
@@ -280,23 +45,25 @@ font-size:18px;
 		transform: rotatez(180deg);
 	}
 }
-.numar {
+#numar {
 	position: relative;
     margin-top: -33%;
     font-size: 78;
 	text-align:center;
+	z-index:2;
 	background-color: #e5ebe7;
 }
-.btn {
+#btn {
 	background-color:#10BBB3;
 	width:fit-content;
 	display:inline;
 	padding:10px;
+	position:relative;
 	color:white;
 	border:1px solid black;
 	font-size:20px;
 }
-.btn:hover{
+#btn:hover{
 	background-color:#208b86;
 	cursor:pointer;
 	
@@ -306,20 +73,39 @@ font-size:18px;
 	margin-top:200px;
 	font-size:30px;
 }
-.butoane {
+
+#hole{
+	position: absolute;
+	z-index:3;
+	top:38vh;
+	left:43vw;
+	width: 13vw;
+	height: 13vw;
+	border-radius:50%;
+	box-shadow: 0 0 0 99999px rgba(0, 0, 0, .8);
+	display:none;
+	transition: width 2s, height 2s, transform 2s;
+}
+#blocheaza {
 	position:absolute;
-	left:15%;
-	top:14px;
+	width:100%;
+	height:100%;
+	top:0px;
+	z-index:3;
+	display:none;
 }
-.butonn {
-	color:white;
-	margin-left:10px;
-	font-size:14;
-}
-.butonn:hover {
-	text-decoration:none;
+#mesaj {
+	position:relative;
 	color:black;
+	background-color:#ffffff90;
+	padding:12px;
+	bottom:12vh;
+	display:none;
+	right: 13vw;
+    width: 36vw;
+	text-align:center;
 }
+
 </style>
 </head>
 <body>
@@ -332,7 +118,7 @@ font-size:18px;
 				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Conecteaza-te</div></a>';
 	else
 		echo '<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form> ';
   ?>
    <div class="profil">
@@ -356,41 +142,6 @@ font-size:18px;
   </div>
   </div>
 
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="loginmodal-container">
-					<h1>Login to Your Account</h1><br>
-				  <form action="include/login.inc.php" method="POST">
-						<input type="text" name="uid" placeholder="username"> 
-						<input type="password" name="pwd" placeholder="password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Login">
-				  </form>
-					
-				  
-				</div>
-			</div>
-		  </div>
-		  
-	
-
-<div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    	  <div class="modal-dialog">
-				<div class="registermodal-container">
-					<h1>Sign up</h1><br>
-				  <form action="include/signup.inc.php" method="POST">
-						<input type="text" name="user_first" placeholder="First name"> 
-						<input type="text" name="user_last" placeholder="Last name">
-						<input type="text" name="user" placeholder="Username">
-						<input type="text" name="user_email" placeholder="Email">
-						<input type="password" name="pwd" placeholder="Password">
-						<input type="password" name="pwd2" placeholder="Confirm password">
-						<input type="submit" name="submit" class="login loginmodal-submit" value="Register">
-				  </form>
-					
-				 
-				</div>
-			</div>
-		  </div>
 		  <?php
 
 if(isset($_SESSION['u_id']))
@@ -398,23 +149,7 @@ if(isset($_SESSION['u_id']))
 	$id_user=$_SESSION['u_id'];
 	$sql1="SELECT * FROM numar";
 	$result1=mysqli_query($conn,$sql1);
-	if(mysqli_num_rows($result1)==0)
-	{
-		$numar=mt_rand(1,100);
-		$sql2="INSERT INTO numar(numar,data) VALUES($numar,CURDATE())";
-		$result2=mysqli_query();
-	}
-	else {
-		$sql3="SELECT * FROM numar WHERE data=CURDATE()";
-		$result3=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result3)==0)
-		{
-			$numar=mt_rand(0,100);
-			$sql4="UPDATE numar SET numar=$numar,data=CURDATE()";
-			$result4=mysqli_query($conn,$sql4);
-		}
-
-	}
+	
 	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
 			$result8=mysqli_query($conn,$sql8);
 			if(mysqli_num_rows($result8)==0)
@@ -428,17 +163,23 @@ if(isset($_SESSION['u_id']))
 
 		<form method='POST' action='numar3.php'>
 			<center>
-			<input type='number' min='1' max='100' autofocus class='numar' name='nr' required /></br>
+			<input type='number' min='1' max='100' id='numar' name='nr' required /></br>
 			
-			<input type='submit' value='submit' class='btn' name='submit' required />
+			<input type='submit' value='submit' id='btn' name='submit' required />
 			</center>
 		</form>
  </div>
  </div>";
 	}
 	else 
-echo '<div class="deja">Deja ai facut provocarea azi! Incearca maine!</div>';}
+echo '<div class="deja">Deja ai făcut provocarea azi! Încearcă mâine!</div>';}
 	?>
-	
+<div id="hole"><div id="mesaj">În fiecare zi este generat un număr la întamplare. O dată pe zi ai șansa de a ghici numărul respectiv și esti recompensat în funcție de cât de aproape ai fost cu xp.</div></div>
+<div id="blocheaza"></div> 
+<?php
+echo '';
+?>
+<script src="scripts/alert.js"></script>
  <body>
  </html>
+

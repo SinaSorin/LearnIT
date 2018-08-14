@@ -2,6 +2,12 @@
 session_start();
 include_once 'include/dbh.inc.php';
 $id_user=$_SESSION['u_id'];
+$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
+$result8=mysqli_query($conn,$sql8);
+if(mysqli_num_rows($result8)!=0)
+{
+	header("Location: numar2.php");
+}
  if(isset($_POST['submit']))
 	{
 		$nr=$_POST['nr'];
@@ -11,20 +17,25 @@ $id_user=$_SESSION['u_id'];
 		{
 			$sql6="INSERT INTO loto(id_user,data) VALUES($id_user,CURDATE())";
 			$result6=mysqli_query($conn,$sql6);
-			 $sql7="SELECT * FROM numar";
-				 $result7=mysqli_query($conn,$sql7);
-				 if(mysqli_num_rows($result7)==1)
-				 {
-					 while($row=mysqli_fetch_assoc($result7))
-					 {
-						$nr_loto=$row['numar'];
+
+						$nr_loto=$numar=mt_rand(1,100);
 						if($nr==$nr_loto)
+						{
 							$xp=100;
+							$text="<p>Felicitări! Ai câștigat un bonus de 100xp!<br>Revino și mâine</p>";
+						}
 						else
 							if(abs($nr-$nr_loto)<=10)
+							{
 								$xp=20;
+								$text="<p>Ai fost foarte aproape! 20 xp pentru tine!<br>Mai încearcă și mâine!";
+							}
 							else
+							{
 								$xp=5;
+								$text="Nu te descuraja! +5xp!";
+								
+							}
 						$sql11="SELECT * FROM rank WHERE id_user=$id_user";
 							$result11=mysqli_query($conn,$sql11);
 							if(mysqli_num_rows($result11)>0)
@@ -45,32 +56,26 @@ $id_user=$_SESSION['u_id'];
 								}
 								
 							}
-					 }
-				 }
+
+				 
 		}
 		else
 		{
 			
 				$sql9="UPDATE loto SET data=CURDATE() WHERE id_user=$id_user";
 				$result9=mysqli_query($conn,$sql9);
-				$sql10="SELECT * FROM numar";
-				$result10=mysqli_query($conn,$sql10);
-				if(mysqli_num_rows($result10)==1)
-				{
-					while($row=mysqli_fetch_assoc($result10))
-					{
-						
-						$nr_loto=$row['numar'];
+
+						$nr_loto=$numar=mt_rand(1,100);
 						if($nr==$nr_loto)
 						{
 							$xp=100;
-							$text="<p>Felicitari! Ai castigat un bonus de 100xp!<br>Revino si maine</p>";
+							$text="<p>Felicitări! Ai câștigat un bonus de 100xp!<br>Revino și mâine</p>";
 						}
 						else
 							if(abs($nr-$nr_loto)<=10)
 							{
 								$xp=20;
-								$text="<p>Ai fost foarte aproape! 20 xp pentru tine!<br>Mai incearca si maine!";
+								$text="<p>Ai fost foarte aproape! 20 xp pentru tine!<br>Mai încearcă și mâine!";
 							}
 							else
 							{
@@ -101,8 +106,8 @@ WHERE id_user ='$id_user';";
 								}
 								
 							}
-					 }
-				 }
+
+				 
 			
 		}
 	}
@@ -462,7 +467,7 @@ font-size:18px;
 				<a href="#" class="link" data-toggle="modal" data-target="#login-modal"><div class="lr divs link">Conecteaza-te</div></a>';
 	else
 		echo '<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form> ';
   ?>
    <div class="profil">

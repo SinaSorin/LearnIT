@@ -1,66 +1,42 @@
 <?php
 session_start();
 include_once 'dbh.inc.php';
-$nr=$_GET['subject'];
-$var=$_GET['var'];
-$id=$_GET['id'];
-$titlu=$_GET['titlu'];
 
-if(isset($_POST["submitq"])) {
-	$user=$_SESSION['u_id'];
-			$sql1="SELECT * FROM test WHERE titlu=$titlu";
-			$result1=mysqli_query($conn,$sql1);
-			if(mysqli_num_rows($result1)==0)
-			{
-				$sql2="INSERT INTO test(id_user,id_lectie,titlu) VALUES('$user','$id','$titlu')";
-				mysqli_query($conn,$sql2);
-			}
-			else
-			{
-				header ("Location: ../grila.php?alege alt titlu!");
-				exit();
-			}
-
-	for($i=1;$i<=$nr;$i++)
+$id_lectie=$_GET['subject'];
+$nr_intrebari=mysqli_real_escape_string($conn,$_POST['imp']);
+if($nr_intrebari==0)
+	header("Location: ../grila1.php?subject=$id_lectie");
+else
 	{
-		$intrebare=mysqli_real_escape_string($conn,$_POST["intrebare$i"]);
-		$sql3="SELECT * FROM test WHERE titlu=$titlu AND id_lectie=$id";
-		$result3=mysqli_query($conn,$sql3);
-		if(mysqli_num_rows($result3)>0)
+		for($i=1;$i<=$nr_intrebari;$i++)
 		{
-			while($row3=mysqli_fetch_assoc($result3))
+			$nr_raspunsuri=mysqli_real_escape_string($conn,$_POST["nr$i"]);
+			if($nr_raspunsuri==0)
+					header("Location: ../grila1.php?subject=$id_lectie");
+		}
+		$user=$_SESSION['u_id'];
+		$sql1="INSERT INTO test(id_user,id_lectie) VALUES('$user','$id_lectie')";
+		$result1=mysqli_query($conn,$sql1);
+		$id_test=mysqli_insert_id($conn);
+		for($i=1;$i<=$nr_intrebari;$i++)
+		{
+			$intrebare=mysqli_real_escape_string($conn,$_POST["data$i"]);
+			$sql2="INSERT INTO intrebari(continut,id_test) VALUES('$intrebare','$id_test')";
+			$result2=mysqli_query($conn,$sql2);
+			$id_intrebare=mysqli_insert_id($conn);
+			$nr_raspunsuri=mysqli_real_escape_string($conn,$_POST["nr$i"]);
+			$raspuns_corect=mysqli_real_escape_string($conn,$_POST["radio$i"]);
+			for($j=1;$j<=$nr_raspunsuri;$j++)
 			{
-				$id_test=$row3['id'];
-				$sql="INSERT INTO intrebari(continut,id_test) VALUES('$intrebare',$id_test)";
-				mysqli_query($conn,$sql);
-				$raspuns_corect=mysqli_real_escape_string($conn,$_POST["corect$i"]);
-				for($j=1;$j<=$var;$j++)
-				{	
-					$varianta=mysqli_real_escape_string($conn,$_POST["var$i$j"]);
+				$varianta=mysqli_real_escape_string($conn,$_POST["raspuns$i$j"]);
 					if($raspuns_corect==$j)
 						$raspuns=1;
 					else
 						$raspuns=0;
-					$sql4="SELECT * FROM intrebari WHERE continut=$intrebare";
-					$result4=mysqli_query($conn,$sql4);
-					if(mysqli_num_row($result4)>0)
-					{
-						while($row5=mysqli_fetch_assoc($result4))
-						{
-							$id_intrebare=$row5['id'];
-							$sql="INSERT INTO raspuns(continut,corect,id_intrebare) VALUES('$varianta','$raspuns',$id_intrebare)";
-							mysqli_query($conn,$sql);
-						}
-					}
-					
-			
-				}	
+				$sql3="INSERT INTO raspuns(continut,corect,id_intrebare) VALUES('$varianta','$raspuns',$id_intrebare)";
+				$result3=mysqli_query($conn,$sql3);
 			}
-			
-		
 		}
-		
-		
 	}
-}
  ?>
+

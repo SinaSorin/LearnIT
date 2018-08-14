@@ -339,7 +339,7 @@ font-size:18px;
 
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
-					<input class="lr divs link" type="submit" name="submit" value="Deconecteaza-te"> 
+					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 		
 		</form>
 		<div class="profil2">
@@ -380,8 +380,8 @@ if(mysqli_num_rows($result)>0)
 class="profil">
  <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
     <input type="file" name="file" id="file" class="inputfile" />
-     <label for="file">Schimba-ti poza de profil</label>
-    <button type='submit' name='submit' class="profileimg">UPLOAD</button> <!--personalizarea profilului -->
+     <label for="file">Schimbă-ți poza de profil</label>
+    <button type='submit' name='submit' class="profileimg">Încarcă</button> <!--personalizarea profilului -->
     </form>
 </section>
 <section class="s3">
@@ -401,7 +401,7 @@ var myChart = new Chart(ctx, {
 		echo "'$labels'";
 		?>],
         datasets: [{
-            label: "Evolutia ta",
+            label: "Evoluția ta",
 			fill: false,
 			lineTension: 0.1,
 			data: [
