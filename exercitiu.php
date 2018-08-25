@@ -40,7 +40,18 @@ include_once 'include/dbh.inc.php';
 	color:red;
 }
 
-
+.sterge {
+    font-size: 3vh;
+    position: relative;
+    bottom: 1.2vh;
+    border: 2px solid red;
+    border-radius: 50%;
+    padding: 8px;
+    text-align: center;
+    color: red;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 
 
 	</style>
@@ -68,6 +79,7 @@ include_once 'include/dbh.inc.php';
 		{
 			$lectie=$row['titlu'];
 			$capitol=$row['capitol'];
+			$id_capitol=$row['id_capitol'];
 		}
 	}
 	if(!isset($_SESSION['u_id']))
@@ -79,12 +91,7 @@ include_once 'include/dbh.inc.php';
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form> ';
-	echo "<div class='butoane'>";
 	
-	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
-	echo "<a href='lectiecapitol.php?subject=$capitol' class='butonn'>$capitol</a>";
-	echo "<a href='continutlectie.php?subject=$lectie & id_lectie=$id_lectie' class='butonn'>Lectie</a>";
-	echo "</div>";
   ?>
     <div class="profil">
   
@@ -99,7 +106,12 @@ include_once 'include/dbh.inc.php';
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
+	echo "<div class='butoane'>";
 	
+	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
+	echo "<a href='lectiecapitol.php?subject=$capitol & id=$id_capitol' class='butonn'>$capitol</a>";
+	echo "<a href='continutlectie.php?subject=$lectie & id_lectie=$id_lectie' class='butonn'>Lectie</a>";
+	echo "</div>";
 	
 	?>	
 	
@@ -142,8 +154,23 @@ include_once 'include/dbh.inc.php';
 			</div>
 		  </div>
 	<div class="tot">
+			
 	<?php 
+		
 	$id=$_GET['subject'];
+	
+	$user=$row['id_user'];
+	
+		if(($_SESSION['u_id']==$user and $_SESSION['u_status']!=3) or $_SESSION['u_status']==1 )
+		{	
+			echo "<a href='include/droptest.inc.php?id=$id'><span class='sterge' style='float:right;'>x</span></a>";
+
+			
+		}
+	
+	
+	
+
 	
 	
 	if(!isset($_POST['submit']))

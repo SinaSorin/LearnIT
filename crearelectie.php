@@ -318,26 +318,10 @@ font-size:18px;
 					
   </div>
 
-<form action="include/lectie.inc.php" method="POST">
+<form action="include/lectie.inc.php?subject=<?php $capitol=$_GET['subject']; echo $capitol;?> & id=<?php $id=$_GET['id']; echo $id;?>" method="POST">
 <div class="text">
-<input class="titlu" type="text" name="titlu" autocomplete="off" placeholder="titlu">
-<div class="capitol" style="font-size:25px;"> Capitol:
-<select class="titlu2" name="capitol">
-	<?php
-	
-	$sql="SELECT * FROM capitole";
-	$result=mysqli_query($conn,$sql);
-	if(mysqli_num_rows($result)>0){
-		while($row=mysqli_fetch_assoc($result)){
-			$capitol=$row['titlu'];
-			echo "<option value='$capitol'>$capitol</option>";
-		}
-			
-	}
+<input class="titlu" type="text" name="titlu" autocomplete="off" placeholder="titlu" required>
 
-	?>
-  </select>
-	</div>
   <textarea id="froala-editor" name="content"></textarea>
 	
   

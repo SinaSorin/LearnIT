@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 	session_start();
 	include_once 'include/dbh.inc.php';
@@ -6,6 +7,7 @@
 	if(isset($_SESSION['u_id']))
 	{
 	$user_status=$_SESSION['u_status'];
+	$id_user=$_SESSION['u_id'];
 	if($user_status==3)
 			header("Location: index.php");
 	}
@@ -194,6 +196,39 @@ body{
 	margin-top:30px;
 	
 }
+#tutorial {
+	width:98.9vw;
+	height:100vh;
+	position: absolute;
+	display: none;
+	
+}
+.video {
+	width:55vw;
+	position: absolute;
+	z-index:3;
+	transform: translate(45%, 10%);
+	box-shadow: 0 0 0 99999px rgba(0, 0, 0, .8);
+	
+}
+#inchide {
+	position: relative;
+    left: 80vw;
+    top: 6vh;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    width: 4vh;
+    z-index: 4;
+    font-size: 3vh;
+	display:none;
+	cursor:pointer;
+}
+#inchide:hover {
+ background-color:#d10404;
+ 
+}
 </style>
 <body>
 <div class="bara">
@@ -222,6 +257,16 @@ body{
 	?>	
 	
   </div>
+  </div>
+  
+  
+<div id="tutorial">
+
+	<div id="inchide" onclick="x()">X</div>
+  <img src="tutoriale/tutorial1.gif" class="video">
+  
+  
+  
   </div>
 <?php 
 $cod=mysqli_real_escape_string($conn,$_POST['content']);
@@ -275,6 +320,9 @@ Codul introdus de tine:
   </div>
 
 </form>
+  
+  
+  
   
 <script>
   $(function() {
@@ -395,6 +443,25 @@ $(document).ready(function(){
     });
 });
 </script>
+<?php 
+$sql1="SELECT * FROM dragdrop WHERE id_user=$id_user";
+$result1=mysqli_query($conn,$sql1);
+if(mysqli_num_rows($result1)==0)
+{
+	echo '<script>
+function inchide() {
+	document.getElementById("inchide").style.display="block";
+	
+	
+}
+function x() {
+	document.getElementById("tutorial").style.display="none";
+}
+document.getElementById("tutorial").style.display="block";
+setTimeout(inchide, 12000);
 
+</script>';
+}
+?>
 </body>
 </html>

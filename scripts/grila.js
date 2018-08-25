@@ -60,7 +60,7 @@ function adauga(i) {
 	
 	var str5 = "<input id='r";
     var str6 = j;
-	var str7 = "' type='text' class='date' autocomplete='off' name='raspuns"
+	var str7 = "' type='text' "+"placeholder='Răspuns "+j +"' class='date' autocomplete='off' name='raspuns"
     var str8 = "' required></p>"
 	
     var text2 = str1.concat(str2,str6,str3,str2,str4);

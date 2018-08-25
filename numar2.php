@@ -23,13 +23,13 @@ include_once 'include/dbh.inc.php';
 	}
 	
 .tot {
-	color:black;
-	width:70%;
-	margin-left:auto;
-	margin-right:auto;
-	padding:12px;
-	padding-top:15px;
-	margin-top:10px;
+	color: black;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2vh;
+    padding-top: 2vh;
+    margin-top: 1vh;
 }
 
 .ruleta{
@@ -47,11 +47,11 @@ include_once 'include/dbh.inc.php';
 }
 #numar {
 	position: relative;
-    margin-top: -33%;
-    font-size: 78;
-	text-align:center;
-	z-index:2;
-	background-color: #e5ebe7;
+    margin-top: -23vw;
+    font-size: 5vw;
+    text-align: center;
+    z-index: 2;
+    background-color: #e5ebe7;
 }
 #btn {
 	background-color:#10BBB3;
@@ -61,7 +61,7 @@ include_once 'include/dbh.inc.php';
 	position:relative;
 	color:white;
 	border:1px solid black;
-	font-size:20px;
+	font-size:3vh;
 }
 #btn:hover{
 	background-color:#208b86;
@@ -99,11 +99,12 @@ include_once 'include/dbh.inc.php';
 	color:black;
 	background-color:#ffffff90;
 	padding:12px;
-	bottom:12vh;
+	bottom:16vh;
 	display:none;
 	right: 13vw;
     width: 36vw;
 	text-align:center;
+	font-size:3vh;
 }
 
 </style>
@@ -122,7 +123,7 @@ include_once 'include/dbh.inc.php';
 					</form> ';
   ?>
    <div class="profil">
-  
+
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
 	if(isset($_SESSION['u_id']))
@@ -147,8 +148,6 @@ include_once 'include/dbh.inc.php';
 if(isset($_SESSION['u_id']))
 {
 	$id_user=$_SESSION['u_id'];
-	$sql1="SELECT * FROM numar";
-	$result1=mysqli_query($conn,$sql1);
 	
 	$sql8="SELECT * FROM loto WHERE id_user=$id_user AND data=CURDATE()";
 			$result8=mysqli_query($conn,$sql8);
@@ -177,9 +176,12 @@ echo '<div class="deja">Deja ai făcut provocarea azi! Încearcă mâine!</div>'
 <div id="hole"><div id="mesaj">În fiecare zi este generat un număr la întamplare. O dată pe zi ai șansa de a ghici numărul respectiv și esti recompensat în funcție de cât de aproape ai fost cu xp.</div></div>
 <div id="blocheaza"></div> 
 <?php
-echo '';
+$sql9="SELECT * FROM loto WHERE id_user=$id_user";
+$result9=mysqli_query($conn,$sql9);
+if(mysqli_num_rows($result9)==0)
+	echo '<script src="scripts/alert.js"></script>';
 ?>
-<script src="scripts/alert.js"></script>
+
  <body>
  </html>
 

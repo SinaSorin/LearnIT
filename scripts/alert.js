@@ -14,7 +14,7 @@ function partea1(){
 }
 function partea2() {
 	numar.style.zIndex="2";
-	hole.style.top="630px";
+	hole.style.top="87vh";
 	hole.style.left="45vw";
 	hole.style.width="9vw";
 	hole.style.height="9vw";
@@ -34,7 +34,7 @@ function schimba() {
 	mesaj.innerHTML = "Alege un număr de la 1 la 100.";
 	mesaj.style.width = "20vw";
 	mesaj.style.right = "5vw";
-	mesaj.style.bottom = "7vh";
+	mesaj.style.bottom = "10vh";
 	numar.style.zIndex="4";
 	numar.focus();
 }

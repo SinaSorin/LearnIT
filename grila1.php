@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once 'include/dbh.inc.php';
+$id_user=$_SESSION['u_id'];
  ?>
 <html>
 	<head>
@@ -45,20 +46,58 @@ include_once 'include/dbh.inc.php';
 
 .btn {
 	background-color:#10BBB3;
-	width:fit-content;
 	display:inline;
-	padding:10px;
 	color:white;
 	border:1px solid black;
-	font-size:20px;
+	font-size:1.5vw;
 	margin-left:10px;
+	text-align:center;
 }
 .btn:hover{
 	background-color:#208b86;
 	cursor:pointer;
 	
 }
-  </style>
+.span {
+	position:relative;
+	top:1vh;
+}
+.date {
+	margin-top:10px;
+}
+#tutorial {
+	width:98.9vw;
+	height:100vh;
+	position: absolute;
+	display:none;
+}
+.video {
+	width:55vw;
+	position: absolute;
+	z-index:5;
+	transform: translate(45%, 10%);
+	box-shadow: 0 0 0 99999px rgba(0, 0, 0, .8);
+	
+}
+#inchide {
+	position: relative;
+    left: 80vw;
+    top: 6vh;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    width: 4vh;
+    z-index: 6;
+    font-size: 3vh;
+	display:none;
+	cursor:pointer;
+}
+#inchide:hover {
+ background-color:#d10404;
+ 
+}
+</style>
 	</head>
 	<body>
 	
@@ -86,7 +125,14 @@ include_once 'include/dbh.inc.php';
   </div>
   </div>
   
-   
+   <div id="tutorial">
+
+	<div id="inchide" onclick="x()">X</div>
+  <img src="tutoriale/tutorial3.gif" class="video">
+  
+  
+  
+  </div>
  
 	
 <div class="tot">
@@ -95,7 +141,7 @@ include_once 'include/dbh.inc.php';
 $id_lectie=$_GET['subject'];
 
 ?>
-
+<span class="text">Adaugă întrebări:</span>
 <button type="button" id="btn1" class="btn">+</button>
 <button type="button"  id="btn2" class="btn">-</button>
 
@@ -103,7 +149,7 @@ $id_lectie=$_GET['subject'];
 
 
 <script src="scripts/grila.js"></script>
-<form method="POST" action="include/grila.inc.php?subject=<?php echo $id_lectie; ?>"><span id="span"></span>
+<form method="POST" action="include/grila.inc.php?subject=<?php echo $id_lectie; ?>"><span id="span" class="span"></span>
 
 <input id="imp" name="imp" type="text" style="display:none;">
  <input type="submit" name="submit">
@@ -113,6 +159,25 @@ $id_lectie=$_GET['subject'];
 
 
 </div>
+<?php 
+$sql1="SELECT * FROM test WHERE id_user=$id_user";
+$result1=mysqli_query($conn,$sql1);
+if(mysqli_num_rows($result1)==0)
+{
+	echo '<script>
+function inchide() {
+	document.getElementById("inchide").style.display="block";
+	
+	
+}
+function x() {
+	document.getElementById("tutorial").style.display="none";
+}
+document.getElementById("tutorial").style.display="block";
+setTimeout(inchide, 24000);
 
+</script>';
+}
+?>
 	</body>
 </html>

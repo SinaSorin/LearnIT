@@ -1,290 +1,77 @@
 <?php 
 session_start();
 include_once 'include/dbh.inc.php';
-$id_user=$_SESSION['u_id'];
+if(isset($_SESSION['u_id']))
+	{
+	$user_status=$_SESSION['u_status'];
+	$id_user=$_SESSION['u_id'];
+	if($user_status!=1)
+			header("Location: index.php");
+	}
+
 ?>
 
 <html>
 <head>
+<title>Profil</title>
+ <link rel="shortcut icon" href="logo2.png" type="image/png">
+ <link rel="stylesheet" href="styles/bara.css">
 <style>
 body {
 	background-color:#e5ebe7;
 	margin:0px;
 	padding:0px;
-	font-size:22px;
+	font-size:3vh;
   }
-  .divs {
-	background-color:#10BBB3;
-	border:0px;
-	color:white;
-	opacity:0.8;
-	margin-bottom:32px;
-	padding:12px;
-  }
-	
-	a {
-		text-decoration:none;
-		color:black;
-	}
-	.divs:hover {
-		background-color:#208b86;
-	}
   
-  	@import url(http://fonts.googleapis.com/css?family=Roboto);
-
-/****** LOGIN MODAL ******/
-.loginmodal-container {
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  font-family: roboto;
-}
-
-.loginmodal-container h1 {
-  text-align: center;
-  font-size: 1.8em;
-  font-family: roboto;
-}
-
-.loginmodal-container input[type=submit] {
-  width: 100%;
-  display: block;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.loginmodal-container input[type=text], input[type=password] {
-  height: 44px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.loginmodal-container input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.loginmodal {
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 700;
-  height: 36px;
-  padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
-}
-
-.loginmodal-submit {
-  /* border: 1px solid #3079ed; */
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #10BBB3;
-  padding: 17px 0px;
-  font-family: roboto;
-  font-size: 14px;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-
-.loginmodal-submit:hover {
-  /* border: 1px solid #208b86; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #208b86;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
-
-.loginmodal-container a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 400;
-  text-align: center;
-  display: inline-block;
-  opacity: 0.6;
-  transition: opacity ease 0.5s;
-} 
-
-
-
-/****** REGISTER MODAL ******/
-.registermodal-container {
-  padding: 30px;
-  max-width: 350px;
-  width: 100% !important;
-  background-color: #F7F7F7;
-  margin: 0 auto;
-  border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  font-family: roboto;
-}
-
-.registermodal-container h1 {
-  text-align: center;
-  font-size: 1.8em;
-  font-family: roboto;
-}
-
-.registermodal-container input[type=submit] {
-  width: 100%;
-  display: block;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.registermodal-container input[type=text], input[type=password] {
-  height: 44px;
-  font-size: 16px;
-  width: 100%;
-  margin-bottom: 10px;
-  -webkit-appearance: none;
-  background: #fff;
-  border: 1px solid #d9d9d9;
-  border-top: 1px solid #c0c0c0;
-  /* border-radius: 2px; */
-  padding: 0 8px;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-}
-
-.registermodal-container input[type=text]:hover, input[type=password]:hover {
-  border: 1px solid #b9b9b9;
-  border-top: 1px solid #a0a0a0;
-  -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.registermodal {
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Arial', sans-serif;
-  font-weight: 700;
-  height: 36px;
-  padding: 0 8px;
-/* border-radius: 3px; */
-/* -webkit-user-select: none;
-  user-select: none; */
-}
-
-.registermodal-submit {
-  /* border: 1px solid #3079ed; */
-  border: 0px;
-  color: #fff;
-  text-shadow: 0 1px rgba(0,0,0,0.1); 
-  background-color: #4d90fe;
-  padding: 17px 0px;
-  font-family: roboto;
-  font-size: 14px;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#4787ed)); */
-}
-
-.registermodal-submit:hover {
-  /* border: 1px solid #2f5bb7; */
-  border: 0px;
-  text-shadow: 0 1px rgba(0,0,0,0.3);
-  background-color: #357ae8;
-  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,   from(#4d90fe), to(#357ae8)); */
-}
-
-.registermodal-container a {
-  text-decoration: none;
-  color: #666;
-  font-weight: 400;
-  text-align: center;
-  display: inline-block;
-  opacity: 0.6;
-  transition: opacity ease 0.5s;
-} 
-
-
-
-.lr {
-	position:relative;
-	float: right;
-	width:auto;
-}
-.link {
-font-size:18px;
-}
-.bara {
-	position:fixed;
-	background-color:#10BBB3;
-	width:100%;
-	height:6.5%;
-	z-index:2;
-}
-.row {
-	
-	width:100%;
-	height:500px;
-}
-.profil{
-	position:relative;
-	
-	background-color:#10BBB3;
-	width:20%;
-	height:80%;
-	
-}
 .s1 {
 	width:100%;
-	height:95%;
+	height:95vh;
 	display:flex;
 }
 .s2 {
-	width:25%;
+	width:25%; 
+	float:left;
 	background-color:#009999;
-	height:105%;
-
+	height:100vh;
 }
 .s3 {
-	width:37%;
-	height:100%;
-	padding:50px;
-	box-sizing:border-box;
 	
+	width:75%; 
+	float:left;
+	height:100vh;
+	display:flex;
 }
 .s4 {
-	width:38%;
-	height:100%;
+	width:50%; 
+	height:100vh;
 	padding:50px;
+	padding-top:20px;
+	box-sizing:border-box;
+}
+.s5 {
+	
+	width:50%; 
+	height:100vh;
+	padding:50px;
+	padding-top:20px;
 	box-sizing:border-box;
 }
 .upgrade {
-	font-size:17px;
+	font-size:2.4vh;
 	background-color:#10BBB3;
 	border:1px solid black;
 	color:white;
 	float:right;
-	
+	padding-bottom:0.1vh;
 }
 .demote {
-	font-size:17px;
+	font-size:2.4vh;
 	background-color:#bb1010;
 	border:1px solid black;
 	color:white;
 	float:right;
-	
+	padding-bottom:0.1vh;
 }
 form {
 display:inline;
@@ -298,9 +85,9 @@ display:inline;
  z-index: -1;
 }
 .inputfile + label {
-    font-size: 1.25em;
+    font-size: 2vw;
     font-weight: 700;
- padding:5px;
+ padding:1vh;
     color: black;
     background-color:white;
     display: inline-block;
@@ -312,58 +99,42 @@ display:inline;
 }
 
 .profileimg{
- padding: 4px;
- width: 100px;
- height: 50px;
- margin: 20px;
- border:none;
- font-weight: 700;
- background-color: #f3f3f3;
- font-family":"arial";
- font-size: 14px;
- color: #111;
- cursor: pointer;
+    padding: 1vw;
+    width: 9vw;
+    height: 5vw;
+    margin: 2vw;
+    border: none;
+    font-weight: 700;
+    background-color: #f3f3f3;
+    color: #111;
+    font-size: 2vw;
+    cursor: pointer;
 }
 .profileimg:hover {
  background-color: #ccc;
 }
-.profil {
-	width:250px;
-	height:250px;
-	border-radius:50%;
-	position:relative;
-	top:120px;
-	left:60px;
+.profil12 {
+	width: 20vw;
+    border-radius: 50%;
+    position: relative;
+    top: 12vh;
+    left: 2.5vw;
 }
 .form {
 	position:relative;
-	top:150px;
-	left:20px;
+	top:16vh;
 }
 .helper {
 	color:#bb1010;
-	font-size:30px;
+	font-size:4.5vh;
 }
 .incepator {
 	color:#10BBB3;
-	font-size:30px;
+	font-size:4.5vh;
 }
-.profil2 {
-	display:flex;
-	
-}
-.poza {
-	width:50px;
-	height:50px;
-	border-radius:50%;
-	
-}
-.cont {
-	display:flex;
-	color:white;
-	font-size:18px;
-	margin-top:10px;
-}
+
+
+
 .poza1 {
 	width:20px;
 	position:absolute;
@@ -380,8 +151,9 @@ display:inline;
 <div class="bara">
 	<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
-				</form>
-	<div class="profil2">
+		
+		</form>
+		<div class="profil">
   
 	<a href="index.php"><img src="logo.png" class="poza"></a>
 	<?php 
@@ -399,7 +171,7 @@ display:inline;
 	?>
   </div>
   </div>
-  
+
 <section class="s1" >
 <section class="s2">
 <?php
@@ -416,14 +188,18 @@ if(mysqli_num_rows($result)>0)
 <img src="<?php 
 		echo $src ;
 ?>"
-class="profil">
+class="profil12">
+ <center>
  <form class="form" action='upload.php' method='POST' enctype='multipart/form-data' >
     <input type="file" name="file" id="file" class="inputfile" />
      <label for="file">Schimbă-ți poza de profil</label>
     <button type='submit' name='submit' class="profileimg">Încarcă</button> <!--personalizarea profilului -->
     </form>
+	</center>
 </section>
 <section class="s3">
+
+<section class="s4">
 <p class="helper"><strong> Ajutoare</strong></p>
 <?php
 	$sql1="SELECT * FROM user WHERE user_status=2";
@@ -481,7 +257,8 @@ class="profil">
 
 ?>
 </section>
-<section class="s4">
+
+<section class="s5">
 <p class="incepator"><strong>Începatori</strong></p>
 <?php
 $sql2="SELECT * FROM user WHERE user_status=3";
@@ -536,6 +313,9 @@ $sql2="SELECT * FROM user WHERE user_status=3";
 
  ?>
 </section>
+
+</section>
+
 </section>
 </body>
 </html>

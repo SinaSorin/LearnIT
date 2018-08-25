@@ -155,7 +155,7 @@ include_once 'include/dbh.inc.php';
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form> ';
-		echo "<div class='butoane'><a href='lectii.php' class='butonn'>Capitole</a></div>";
+		
   ?>
    <div class="profil">
   
@@ -170,7 +170,7 @@ include_once 'include/dbh.inc.php';
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
-	
+	echo "<div class='butoane'><a href='lectii.php' class='butonn'>Capitole</a></div>";
 	
 	?>	
 	
@@ -215,9 +215,9 @@ include_once 'include/dbh.inc.php';
 	
   <div class="content">
    <?php
-
+$id_capitol=$_GET['id'];
 $capitol=$_GET['subject'];
-$sql="SELECT * FROM lectii WHERE capitol='$capitol'";
+$sql="SELECT * FROM lectii WHERE id_capitol='$id_capitol'";
 $result0=mysqli_query($conn,$sql);
 if(mysqli_num_rows($result0)>0){
 	while($row=mysqli_fetch_assoc($result0)){
@@ -250,22 +250,24 @@ if(mysqli_num_rows($result0)>0){
 	<?php
 	if(isset($_SESSION['u_status']))
 	if($_SESSION['u_status']==1 or $_SESSION['u_status']==2)
-	echo "
-	<a href='crearelectie.php'>
-	<div class='lectie'>
-		<center><div class='lectie0'>
-	
-	
-	Adaugă lecție
-	
-			
-	
-			</div></center>
-		
-		
-		</div>
-	</a>
-  </div>"
+	{
+			echo "
+				<a href='crearelectie.php?subject=$capitol &id=$id_capitol'>
+				<div class='lectie'>
+					<center><div class='lectie0'>
+				
+				
+				Adaugă lecție
+				
+						
+				
+						</div></center>
+					
+					
+					</div>
+					</a>
+				</div>";
+	}
   ?>
  
   

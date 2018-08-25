@@ -126,6 +126,19 @@ include_once 'include/dbh.inc.php';
 	outline-color: transparent;
 	
 }
+.buton2{
+	border:0px;
+	background-color:transparent;
+	
+}
+.buton2:hover {
+	background-color:#9bbbb2;
+}
+
+.buton2:focus {
+	outline-color: transparent;
+	
+}
 .overlay1{
 	position: absolute;
 	background-color: #0c615e54;
@@ -150,6 +163,22 @@ include_once 'include/dbh.inc.php';
 	text-align:center;
 	margin-top:20px;
 }
+.x {
+    position: absolute;
+    float: right;
+    color: red;
+    font-size: 3vh;
+    right: 1vw;
+    top: 1vh;
+	z-index:5;
+	cursor:pointer;
+}
+.x:hover {
+	text-decoration: none;
+	color: red;
+	
+}
+
   </style>
  </head>
  <body>
@@ -233,14 +262,41 @@ include_once 'include/dbh.inc.php';
 	if(mysqli_num_rows($result) > 0){
 		while($row=mysqli_fetch_assoc($result)) {
 			$titlu=$row['titlu'];
-			echo "<div class='capitol1'>
-			<p class='nume'>$titlu</p>
-			<a href='lectiecapitol.php?subject=$titlu'>
+			$id=$row['id'];
+			echo "<div class='capitol1'>";
+			if($user_status==1)
+			echo "<button type='button' class='buton2 x' data-toggle='modal' data-target='#myModal$id'>
+			X</button>";
+			echo "<p class='nume'>$titlu</p>
+			<a href='lectiecapitol.php?subject=$titlu & id=$id'>
 			<div class='overlay'>
 			<div class='text'>Vezi lecții</div>
 			</div>
 			</a>
-			</div>";	
+			</div>
+			<div class='modal fade' id='myModal$id' role='dialog'>
+    <div class='modal-dialog'>
+    
+     
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <button type='button' class='close' data-dismiss='modal'>&times;</button>
+          <h4 class='modal-title'>Stergere capitol</h4>
+        </div>
+		<div class='modal-body'>
+		
+			Esti sigur ca vrei sa stergi capitolul?
+          
+						</div>
+        <div class='modal-footer'>
+						<a class='btn btn-default' href='include/dropcapitol.inc.php?id=$id'>Da</a>
+        </div>
+		
+		 
+      </div>
+      
+    </div>
+  </div>";	
 		}
 	}
 	else
@@ -251,7 +307,7 @@ include_once 'include/dbh.inc.php';
 	if($_SESSION['u_status']==1 or $_SESSION['u_status']==2)
 	echo"<button type='button' class='buton1' data-toggle='modal' data-target='#myModal'>
 	<div class='capitol2'>
-	 <!-- Trigger the modal with a button -->
+	 
  Adaugă capitol
 	
 			
@@ -262,11 +318,11 @@ include_once 'include/dbh.inc.php';
   
  
 
-  <!-- Modal -->
+  
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
+     
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -276,7 +332,7 @@ include_once 'include/dbh.inc.php';
 		<form action="include/capitol.inc.php" method="POST">
  
           
-				<input type="text" name="capitol" placeholder="capitol" class="inp"> 
+				<input type="text" name="capitol" required placeholder="capitol" class="inp"> 
 						</div>
         <div class="modal-footer">
 						<input type="submit" name="submit" class="btn btn-default" value=" trimite">
@@ -288,7 +344,33 @@ include_once 'include/dbh.inc.php';
     </div>
   </div>
   
-
+  
+	
+  
+<div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+     
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Stergere capitol</h4>
+        </div>
+		<div class="modal-body">
+		
+			Esti sigur ca vrei sa stergi capitolul?
+          
+						</div>
+        <div class="modal-footer">
+						<a class="btn btn-default">Da</a>
+        </div>
+		
+		 
+      </div>
+      
+    </div>
+  </div>
+  
   
   
   

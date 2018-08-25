@@ -37,6 +37,16 @@ else
 				$result3=mysqli_query($conn,$sql3);
 			}
 		}
+		$sql4="SELECT * FROM lectii WHERE id=$id_lectie";
+		$result4=mysqli_query($conn,$sql4);
+		if(mysqli_num_rows($result4))
+		{
+			while($row4=mysqli_fetch_assoc($result4))
+			{
+				$titlu=$row4['titlu'];
+			}
+		}
+		header("Location: ../continutlectie.php?subject=$titlu & id_lectie=$id_lectie");
 	}
  ?>
 

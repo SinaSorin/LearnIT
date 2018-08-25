@@ -77,6 +77,8 @@ include_once 'include/dbh.inc.php';
 
 $id_user=$_SESSION['u_id'];
 $id=$_GET['subject'];
+$sql="INSERT INTO user_drag(id_user,id_test) VALUES('$id_user','$id')";
+$result=mysqli_query($conn,$sql);
 $sql1="SELECT * FROM dragdrop WHERE id=$id";
 $result1=mysqli_query($conn,$sql1);
 if(mysqli_num_rows($result1)>0)

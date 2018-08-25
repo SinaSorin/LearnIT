@@ -40,7 +40,18 @@ include_once 'include/dbh.inc.php';
 	background-color:#ffffffb5;
 	margin-top:100px;
 }
-
+.sterge {
+    font-size: 3vh;
+    position: relative;
+    bottom: 1.2vh;
+    border: 2px solid red;
+    border-radius: 50%;
+    padding: 8px;
+    text-align: center;
+    color: red;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
 </style>
 </head>
 <body>
@@ -54,6 +65,7 @@ include_once 'include/dbh.inc.php';
 		while($row=mysqli_fetch_assoc($result))
 		{
 			$capitol=$row['capitol'];
+			$id_capitol=$row['id_capitol'];
 		}
 	}
 	if(!isset($_SESSION['u_id']))
@@ -65,10 +77,7 @@ include_once 'include/dbh.inc.php';
 		echo '<form action="include/logout.inc.php" method="POST" >
 					<input class="lr divs link" type="submit" name="submit" value="Deconectează-te"> 
 					</form> ';
-	echo "<div class='butoane'>";
-	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
-	echo "<a href='lectiecapitol.php?subject=$capitol' class='butonn'>$capitol</a>";
-	echo "</div>";
+	
   ?>
   <div class="profil">
   
@@ -83,7 +92,10 @@ include_once 'include/dbh.inc.php';
 	else
 		echo "<a href='cont.php'><div class='cont'>$user</div></a>";
 	}
-	
+	echo "<div class='butoane'>";
+	echo "<a href='lectii.php' class='butonn'>Capitole</a>";
+	echo "<a href='lectiecapitol.php?subject=$capitol & id=$id_capitol' class='butonn'>$capitol</a>";
+	echo "</div>";
 	
 	?>	
 	
@@ -138,9 +150,11 @@ if(mysqli_num_rows($result)>0){
 	while($row=mysqli_fetch_assoc($result)){
 		$lectie=$row['lectie'];
 		$user=$row['id_user'];
-		if(isset($_SESSION['u_id']) and $_SESSION['u_id']==$user)
-		{
-			echo "<a href='editarelectie.php?subject=$id_lectie'><span class='glyphicon glyphicon-pencil' style='float:right;'></span></a>";
+		if(($_SESSION['u_id']==$user and $_SESSION['u_status']!=3) or $_SESSION['u_status']==1 )
+		{	
+			echo "<a href='include/droplectie.inc.php?id=$id_lectie'><span class='sterge' style='float:right;'>x</span></a>";
+			echo "<a href='editarelectie.php?subject=$id_lectie'><span class='glyphicon glyphicon-pencil' style='float:right;position:relative;right:20px;'></span></a>";
+			
 		}
 		
 		echo "<div class='titlu'>$titlu</div>
